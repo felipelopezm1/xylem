@@ -1,0 +1,125 @@
+.pretext-hover {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  cursor: default;
+}
+
+.pretext-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.pretext-measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: pre-wrap;
+  width: 100%;
+  inset: 0;
+}
+
+.pretext-anchor {
+  display: block;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: normal;
+  word-wrap: break-word;
+  user-select: none;
+}
+
+.pretext-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.pretext-char {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transform-origin: center center;
+  will-change: transform;
+  transition: transform 0.12s ease-out, text-shadow 0.12s ease-out;
+  white-space: pre;
+  pointer-events: auto;
+}
+
+.pretext-char--em {
+  font-style: italic;
+}
+
+.pretext-char--strong {
+  font-weight: 600;
+}
+
+.pretext-char--hl,
+.pretext-char--span {
+  color: var(--cyan);
+}
+
+.page-society .pretext-char--hl {
+  color: var(--orange);
+}
+
+.page-society .pretext-char--hl2 {
+  color: var(--lime);
+}
+
+.page-society section.bone .pretext-char--hl {
+  color: var(--orange);
+}
+
+.page-society section.bone .pretext-char--hl2 {
+  color: var(--lime-deep);
+}
+
+.pretext-char--of {
+  color: var(--orange);
+}
+
+.pretext-hover--inline {
+  display: inline-block;
+  width: auto;
+}
+
+.pretext-char--x {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--cyan);
+}
+
+.pretext-char--hl2 {
+  color: var(--green);
+}
+
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
+  .pretext-hover .pretext-stage,
+  .pretext-hover .pretext-measure,
+  .pretext-hover .pretext-anchor {
+    display: none;
+  }
+
+  .pretext-sr {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}

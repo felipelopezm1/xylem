@@ -18,13 +18,9 @@ export default function FAQSection() {
       <Wrap>
         <div className="head reveal">
           <span className="num-tag">05</span>
-          <span className="eyebrow">
-            <Trans k="q.eye" />
-          </span>
+          <Trans k="q.eye" className="eyebrow" interactive={false} />
         </div>
-        <h2 className="sec-title reveal cursor-invert-target" style={{ marginBottom: 50 }}>
-          <Trans k="q.title" />
-        </h2>
+        <Trans k="q.title" className="sec-title reveal" as="h2" style={{ marginBottom: 50 }} />
         <div className="faq reveal" id="faq">
           {FAQ_ITEMS.map(({ n, q, a }, index) => {
             const open = openIndex === index
@@ -32,15 +28,13 @@ export default function FAQSection() {
               <div key={n} className={`item${open ? ' open' : ''}`}>
                 <button type="button" onClick={() => setOpenIndex(open ? null : index)}>
                   <span className="q-n">{n}</span>
-                  <span className="q-t cursor-invert-target">
-                    <Trans k={q} />
+                  <span className="q-t">
+                    <Trans k={q} inline />
                   </span>
                   <span className="pm">+</span>
                 </button>
                 <div className="ans" style={{ maxHeight: open ? 500 : 0 }}>
-                  <p className="cursor-invert-target">
-                    <Trans k={a} />
-                  </p>
+                  <Trans k={a} as="p" />
                 </div>
               </div>
             )

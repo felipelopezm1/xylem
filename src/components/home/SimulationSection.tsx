@@ -19,19 +19,11 @@ export default function SimulationSection() {
       <Wrap>
         <div className="head reveal">
           <span className="num-tag">01</span>
-          <span className="eyebrow">
-            <Trans k="xy.eye" />
-          </span>
+          <Trans k="xy.eye" className="eyebrow" interactive={false} />
         </div>
-        <h2 className="sec-title reveal cursor-invert-target">
-          <Trans k="xy.title" />
-        </h2>
-        <p className="lead reveal cursor-invert-target">
-          <Trans k="xy.q" />
-        </p>
-        <p className="body-copy ink reveal cursor-invert-target">
-          <Trans k="xy.p1" />
-        </p>
+        <Trans k="xy.title" className="sec-title reveal" as="h2" />
+        <Trans k="xy.q" className="lead reveal" as="p" />
+        <Trans k="xy.p1" className="body-copy ink reveal" as="p" />
 
         <div className="layers">
           {LAYERS.map(({ ix, glyph, color, title, role, desc }) => (
@@ -39,15 +31,11 @@ export default function SimulationSection() {
               <span className="gl" />
               <div className="ix">{ix}</div>
               <div className="gly">{glyph}</div>
-              <h4 className="cursor-invert-target">
-                <Trans k={title} />
-              </h4>
+              <Trans k={title} as="h4" />
               <div className="role">
-                <Trans k={role} />
+                <Trans k={role} interactive={false} />
               </div>
-              <p>
-                <Trans k={desc} />
-              </p>
+              <Trans k={desc} as="p" interactive={false} />
             </div>
           ))}
         </div>
@@ -63,9 +51,7 @@ export default function SimulationSection() {
               loading="lazy"
             />
           </div>
-          <p className="iso-cap cursor-invert-target">
-            <Trans k="xy.iso" />
-          </p>
+          <Trans k="xy.iso" className="iso-cap" interactive={false} as="p" />
         </div>
       </Wrap>
     </section>
@@ -80,13 +66,13 @@ export function MetricsSection() {
           <div className="metric">
             <div className="v">5</div>
             <div className="l">
-              <Trans k="m.l1" />
+              <Trans k="m.l1" interactive={false} />
             </div>
           </div>
           <div className="metric">
             <div className="v">1550</div>
             <div className="l">
-              <Trans k="m.l2" />
+              <Trans k="m.l2" interactive={false} />
             </div>
           </div>
           <div className="metric">
@@ -94,13 +80,13 @@ export function MetricsSection() {
               <em>3</em>
             </div>
             <div className="l">
-              <Trans k="m.l3" />
+              <Trans k="m.l3" interactive={false} />
             </div>
           </div>
           <div className="metric">
             <div className="v">33333</div>
             <div className="l">
-              <Trans k="m.l4" />
+              <Trans k="m.l4" interactive={false} />
             </div>
           </div>
         </div>

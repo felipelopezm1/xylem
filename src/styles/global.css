@@ -78,43 +78,7 @@ img {
   transform: none;
 }
 
-/* Cursor invert hover targets */
-.cursor-invert-target {
-  position: relative;
-  cursor: default;
-}
-
-.cursor-spotlight {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  background: #fff;
-  mix-blend-mode: difference;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.25s ease, width 0.2s ease, height 0.2s ease;
-  will-change: transform, opacity;
-}
-
-.cursor-spotlight.active {
-  opacity: 1;
-}
-
-.cursor-spotlight.pressed {
-  width: 56px;
-  height: 56px;
-}
-
-@media (pointer: coarse) {
-  .cursor-spotlight {
-    display: none;
-  }
-}
+/* Cursor invert hover targets — replaced by pretext-hover */
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -125,10 +89,6 @@ img {
     opacity: 1;
     transform: none;
     transition: none;
-  }
-
-  .cursor-spotlight {
-    display: none;
   }
 }
 

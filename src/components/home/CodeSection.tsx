@@ -7,24 +7,14 @@ export default function CodeSection() {
       <Wrap>
         <div className="head reveal">
           <span className="num-tag">00</span>
-          <span className="eyebrow">
-            <Trans k="code.eye" />
-          </span>
+          <Trans k="code.eye" className="eyebrow" interactive={false} />
         </div>
-        <h2 className="sec-title reveal cursor-invert-target">
-          <Trans k="code.title" />
-        </h2>
+        <Trans k="code.title" className="sec-title reveal" as="h2" />
         <div className="split" style={{ marginTop: 50 }}>
           <div className="reveal">
-            <p className="lead cursor-invert-target">
-              <Trans k="code.lead" />
-            </p>
-            <p className="body-copy cursor-invert-target">
-              <Trans k="code.p1" />
-            </p>
-            <p className="body-copy cursor-invert-target">
-              <Trans k="code.p2" />
-            </p>
+            <Trans k="code.lead" className="lead" as="p" />
+            <Trans k="code.p1" className="body-copy" as="p" />
+            <Trans k="code.p2" className="body-copy" as="p" />
           </div>
           <div className="term reveal">
             <div className="bar">

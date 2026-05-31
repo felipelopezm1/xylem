@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Wrap from '../layout/Wrap'
 import { Trans } from '../../contexts/LanguageContext'
+import PretextHoverText from '../effects/PretextHoverText'
 
 export default function SocietyHero() {
   return (
@@ -8,34 +9,24 @@ export default function SocietyHero() {
       <span className="disc d-orange" />
       <span className="disc d-lime" />
       <Wrap>
-        <span className="kicker">
-          <Trans k="hero.kicker" />
-        </span>
-        <h1 className="cursor-invert-target">
-          Xylem <span className="of">of</span>
-          <br />
-          Society
-        </h1>
-        <p className="subhead cursor-invert-target">
-          <Trans k="hero.sub" />
-        </p>
+        <Trans k="hero.kicker" className="kicker" interactive={false} as="span" />
+        <PretextHoverText
+          html='Xylem <span class="of">of</span> Society'
+          as="h1"
+          plain="Xylem of Society"
+        />
+        <Trans k="hero.sub" className="subhead" as="p" />
         <div className="volt">
-          <div className="q cursor-invert-target">
-            <Trans k="hero.vq" />
-          </div>
-          <div className="a">
-            <Trans k="hero.va" />
-          </div>
+          <Trans k="hero.vq" className="q" as="div" />
+          <Trans k="hero.va" className="a" interactive={false} as="div" />
         </div>
-        <p className="lead-intro cursor-invert-target">
-          <Trans k="hero.intro" />
-        </p>
+        <Trans k="hero.intro" className="lead-intro" as="p" />
         <div className="cta-row">
           <a href="#s1" className="btn fill">
-            <Trans k="hero.cta1" />
+            <Trans k="hero.cta1" interactive={false} />
           </a>
           <Link to="/" className="btn">
-            <Trans k="hero.cta2" />
+            <Trans k="hero.cta2" interactive={false} />
           </Link>
         </div>
       </Wrap>

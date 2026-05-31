@@ -39,7 +39,7 @@
   font-family: var(--serif);
   font-style: italic;
   font-size: clamp(15px, 2.4vw, 22px);
-  color: var(--muted);
+  color: #a8b4cf;
   margin-top: 28px;
   letter-spacing: 0.01em;
 }
@@ -223,6 +223,7 @@ header.solid {
 }
 
 h1.title {
+  font-family: var(--serif);
   font-weight: 600;
   line-height: 0.92;
   letter-spacing: -0.02em;
@@ -426,7 +427,7 @@ section.block {
 }
 
 .body-copy {
-  color: var(--muted);
+  color: #b4bfd8;
   font-size: clamp(15px, 1.5vw, 17px);
   max-width: 62ch;
   margin-top: 20px;
@@ -608,7 +609,7 @@ section.block {
 }
 
 .layer p {
-  color: var(--muted);
+  color: #a8b4cf;
   font-size: 13.5px;
   margin-top: 14px;
   line-height: 1.6;
@@ -699,7 +700,7 @@ section.block {
 }
 
 .ring p {
-  color: var(--muted);
+  color: #a8b4cf;
   font-size: 13.5px;
   font-family: var(--mono);
   font-weight: 300;
@@ -748,7 +749,7 @@ section.block {
 }
 
 .tri p {
-  color: var(--muted);
+  color: #b4bfd8;
   font-size: 14.5px;
   line-height: 1.65;
 }
@@ -848,8 +849,9 @@ section.block {
   transition: max-height 0.5s ease;
 }
 
-.faq .ans p {
-  color: var(--muted);
+.faq .ans p,
+.faq .ans .pretext-hover {
+  color: #b4bfd8;
   font-size: clamp(15px, 1.5vw, 17px);
   line-height: 1.7;
   padding: 0 0 30px 52px;

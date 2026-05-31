@@ -1,5 +1,6 @@
 import Wrap from '../layout/Wrap'
 import { Trans } from '../../contexts/LanguageContext'
+import PretextHoverText from '../effects/PretextHoverText'
 
 export default function VeinsBackground() {
   return (
@@ -35,32 +36,27 @@ export function Hero() {
       <Wrap>
         <div className="hero-grid">
           <div>
-            <p className="epigraph cursor-invert-target">
-              <Trans k="hero.epi" />
-            </p>
-            <h1 className="title cursor-invert-target">
-              X<span className="x">y</span>lem
-            </h1>
-            <p className="subtitle cursor-invert-target">
-              <Trans k="hero.sub" />
-            </p>
+            <Trans k="hero.epi" className="epigraph" as="p" />
+            <PretextHoverText
+              html='X<span class="x">y</span>lem'
+              className="title"
+              as="h1"
+              plain="Xylem"
+            />
+            <Trans k="hero.sub" className="subtitle" as="p" />
             <div className="by">
-              <span className="cursor-invert-target">
-                <Trans k="hero.by1" />
-              </span>
-              <span className="cursor-invert-target">
-                <Trans k="hero.by2" />
-              </span>
+              <Trans k="hero.by1" interactive={false} inline />
+              <Trans k="hero.by2" interactive={false} inline />
             </div>
             <div className="cta-row">
               <a href="#xylem" className="btn fill">
-                <Trans k="hero.cta1" />
+                <Trans k="hero.cta1" interactive={false} />
               </a>
               <a href="#code" className="btn">
-                <Trans k="hero.cta2" />
+                <Trans k="hero.cta2" interactive={false} />
               </a>
               <a href="/xylem-of-society" className="btn society">
-                <Trans k="hero.cta3" />
+                <Trans k="hero.cta3" interactive={false} />
               </a>
             </div>
           </div>
@@ -97,9 +93,7 @@ export function Hero() {
         </div>
       </Wrap>
       <div className="scrollcue">
-        <span className="cursor-invert-target">
-          <Trans k="hero.scroll" />
-        </span>
+        <Trans k="hero.scroll" interactive={false} inline />
         <span className="bar" />
       </div>
     </section>

@@ -5,6 +5,7 @@ import App from './App'
 import { LanguageProvider } from './contexts/LanguageContext'
 import './styles/tokens.css'
 import './styles/global.css'
+import './styles/pretext-hover.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

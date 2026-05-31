@@ -3,7 +3,7 @@ import SocietyPreloader from '../components/society/SocietyPreloader'
 import SocietyHeader from '../components/society/SocietyHeader'
 import SocietyHero from '../components/society/SocietyHero'
 import SocietyTicker from '../components/society/SocietyTicker'
-import { SocietySection, ProxyCardsSection, VascularSection } from '../components/society/SocietySections'
+import { SocietySection, ProxyCardsSection, ProxyBridgeSection, VascularSection } from '../components/society/SocietySections'
 import SocietyFooter from '../components/society/SocietyFooter'
 import { useHeaderSolid, useScrollReveal, useSocietyPreloader } from '../hooks/useSiteEffects'
 import '../styles/society.css'
@@ -17,8 +17,9 @@ export default function SocietyPage() {
 
   useEffect(() => {
     document.title = 'Xylem of Society — Economic Growth & Trade on Nature Proxies & AI'
-    document.body.style.background = 'var(--society-bg)'
-    document.body.style.color = 'var(--bone)'
+    document.body.classList.add('page-society')
+    document.body.classList.remove('page-home')
+    return () => document.body.classList.remove('page-society')
   }, [])
 
   return (
@@ -74,6 +75,7 @@ export default function SocietyPage() {
           paragraphs={[{ key: 's4.p1' }, { key: 's4.p2' }]}
         />
         <ProxyCardsSection />
+        <ProxyBridgeSection />
         <SocietySection
           id="s6"
           num="06"

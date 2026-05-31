@@ -9,53 +9,39 @@ export default function HomeFooter() {
         <Wrap>
           <div className="foot-top">
             <div className="reveal">
-              <p className="foot-big cursor-invert-target">
-                <Trans k="ft.big" />
-              </p>
+              <Trans k="ft.big" className="foot-big" as="p" />
             </div>
             <div className="foot-col reveal">
-              <h6>
-                <Trans k="ft.work" />
-              </h6>
+              <Trans k="ft.work" as="h6" interactive={false} />
               <a href="#xylem">
-                <Trans k="ft.w1" />
+                <Trans k="ft.w1" interactive={false} />
               </a>
               <a href="#code">
-                <Trans k="ft.w2" />
+                <Trans k="ft.w2" interactive={false} />
               </a>
               <a href="https://chagra-net.vercel.app/en" target="_blank" rel="noopener noreferrer">
-                <Trans k="ft.w3" />
+                <Trans k="ft.w3" interactive={false} />
               </a>
               <a href="https://sketch-real-mvp.vercel.app/" target="_blank" rel="noopener noreferrer">
-                <Trans k="ft.w5" />
+                <Trans k="ft.w5" interactive={false} />
               </a>
               <a href="https://letrina-store.vercel.app/" target="_blank" rel="noopener noreferrer">
-                <Trans k="ft.w4" />
+                <Trans k="ft.w4" interactive={false} />
               </a>
             </div>
             <div className="foot-col reveal">
-              <h6>
-                <Trans k="ft.contact" />
-              </h6>
-              <p>
-                <Trans k="ft.c1" />
-              </p>
+              <Trans k="ft.contact" as="h6" interactive={false} />
+              <Trans k="ft.c1" as="p" interactive={false} />
               <a href="https://portfolio-felipe-lopez.vercel.app/" target="_blank" rel="noopener noreferrer">
-                <Trans k="ft.c2" />
+                <Trans k="ft.c2" interactive={false} />
               </a>
-              <p>
-                <Trans k="ft.c3" />
-              </p>
-              <p>
-                <Trans k="ft.c4" />
-              </p>
+              <Trans k="ft.c3" as="p" interactive={false} />
+              <Trans k="ft.c4" as="p" interactive={false} />
             </div>
           </div>
           <div className="foot-bottom">
             <span>© 2026 Felipe López Mantilla</span>
-            <span>
-              <Trans k="ft.tag" />
-            </span>
+            <Trans k="ft.tag" interactive={false} inline />
             <span className="mono">MODEL · MEASURE · MENTOR</span>
           </div>
         </Wrap>

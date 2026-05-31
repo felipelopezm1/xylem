@@ -14,36 +14,22 @@ export default function ChagraSection() {
       <Wrap>
         <div className="head reveal">
           <span className="num-tag">02</span>
-          <span className="eyebrow">
-            <Trans k="ch.eye" />
-          </span>
+          <Trans k="ch.eye" className="eyebrow" interactive={false} />
         </div>
-        <h2 className="sec-title reveal cursor-invert-target">
-          <Trans k="ch.title" />
-        </h2>
+        <Trans k="ch.title" className="sec-title reveal" as="h2" />
         <div className="split" style={{ marginTop: 50 }}>
           <div className="reveal">
-            <p className="lead cursor-invert-target">
-              <Trans k="ch.lead" />
-            </p>
-            <p className="body-copy cursor-invert-target">
-              <Trans k="ch.p1" />
-            </p>
-            <p className="body-copy cursor-invert-target">
-              <Trans k="ch.p2" />
-            </p>
+            <Trans k="ch.lead" className="lead" as="p" />
+            <Trans k="ch.p1" className="body-copy" as="p" />
+            <Trans k="ch.p2" className="body-copy" as="p" />
           </div>
           <div className="reveal">
             <div className="rings">
               {RINGS.map(({ n, title, desc }) => (
                 <div key={n} className="ring">
                   <div className="n">{n}</div>
-                  <h5 className="cursor-invert-target">
-                    <Trans k={title} />
-                  </h5>
-                  <p>
-                    <Trans k={desc} />
-                  </p>
+                  <Trans k={title} as="h5" />
+                  <Trans k={desc} as="p" interactive={false} />
                 </div>
               ))}
             </div>

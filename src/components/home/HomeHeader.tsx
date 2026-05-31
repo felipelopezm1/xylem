@@ -29,7 +29,7 @@ export default function HomeHeader() {
         <nav className={`navlinks${menuOpen ? ' show' : ''}`} id="navlinks">
           {NAV_LINKS.map(({ href, key }) => (
             <a key={key} href={href} onClick={() => setMenuOpen(false)}>
-              <Trans k={key} />
+              <Trans k={key} interactive={false} />
             </a>
           ))}
         </nav>

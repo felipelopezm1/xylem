@@ -35,44 +35,32 @@ export function SocietySection({
         <div className="s-head reveal">
           <div className="bignum">{num}</div>
           <div className="meta">
-            <span className="eyebrow">
-              <Trans k={eyebrowKey} />
-            </span>
+            <Trans k={eyebrowKey} className="eyebrow" interactive={false} />
             {chips.length > 0 && (
               <div className="threads">
                 {chips.map(({ key, className }) => (
                   <span key={key} className={`chip ${className}`}>
-                    <Trans k={key} />
+                    <Trans k={key} interactive={false} inline />
                   </span>
                 ))}
               </div>
             )}
-            <h2 className="s-title cursor-invert-target">
-              <Trans k={titleKey} />
-            </h2>
+            <Trans k={titleKey} className="s-title" as="h2" />
           </div>
         </div>
         <div className="grid2 reveal">
-          <p className="lead cursor-invert-target">
-            <Trans k={leadKey} />
-          </p>
+          <Trans k={leadKey} className="lead" as="p" />
           <div>
             {paragraphs.map(({ key }) => (
-              <p key={key} className="copy cursor-invert-target">
-                <Trans k={key} />
-              </p>
+              <Trans key={key} k={key} className="copy" as="p" />
             ))}
             {children}
           </div>
         </div>
         {pullQuote && (
           <div className="pull reveal">
-            <div className="pq cursor-invert-target">
-              <Trans k={pullQuote.quoteKey} />
-            </div>
-            <div className="pa">
-              <Trans k={pullQuote.attrKey} />
-            </div>
+            <Trans k={pullQuote.quoteKey} className="pq" />
+            <Trans k={pullQuote.attrKey} className="pa" interactive={false} />
           </div>
         )}
       </Wrap>
@@ -94,39 +82,200 @@ export function ProxyCardsSection() {
         <div className="s-head reveal">
           <div className="bignum">05</div>
           <div className="meta">
-            <span className="eyebrow">
-              <Trans k="s5.eye" />
-            </span>
+            <Trans k="s5.eye" className="eyebrow" interactive={false} />
             <div className="threads">
               <span className="chip xy">
-                <Trans k="t.xy" />
+                <Trans k="t.xy" interactive={false} inline />
               </span>
             </div>
-            <h2 className="s-title cursor-invert-target">
-              <Trans k="s5.title" />
-            </h2>
+            <Trans k="s5.title" className="s-title" as="h2" />
           </div>
         </div>
-        <p className="lead reveal cursor-invert-target">
-          <Trans k="s5.lead" />
-        </p>
+        <Trans k="s5.lead" className="lead reveal" as="p" />
         <div className="pcards reveal">
           {cards.map(({ pi, role, title, desc }) => (
             <div key={pi} className="pcard">
               <div className="pi">
                 {pi} · <span className="arrow">→</span>{' '}
-                <span>
-                  <Trans k={role} />
-                </span>
+                <Trans k={role} interactive={false} inline />
               </div>
-              <h4 className="cursor-invert-target">
-                <Trans k={title} />
-              </h4>
-              <p className="cursor-invert-target">
-                <Trans k={desc} />
-              </p>
+              <Trans k={title} as="h4" />
+              <Trans k={desc} as="p" />
             </div>
           ))}
+        </div>
+      </Wrap>
+    </section>
+  )
+}
+
+export function ProxyBridgeSection() {
+  return (
+    <section className="s dark" id="s-proxy-bridge">
+      <Wrap>
+        <div className="s-head reveal">
+          <div className="meta">
+            <Trans k="sx.eye" className="eyebrow" interactive={false} />
+            <div className="threads">
+              <span className="chip vo">
+                <Trans k="t.vo" interactive={false} inline />
+              </span>
+              <span className="chip xy">
+                <Trans k="t.xy" interactive={false} inline />
+              </span>
+              <span className="chip ch">
+                <Trans k="t.ch" interactive={false} inline />
+              </span>
+            </div>
+            <Trans k="sx.title" className="s-title" as="h2" />
+          </div>
+        </div>
+        <Trans k="sx.lead" className="lead reveal" as="p" />
+        <div className="vasc reveal">
+          <svg viewBox="0 0 760 480" aria-hidden="true">
+            <defs>
+              <marker
+                id="arr-vo"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path d="M0 0 L10 5 L0 10 z" fill="#ff3d17" />
+              </marker>
+              <marker
+                id="arr-ch"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path d="M0 0 L10 5 L0 10 z" fill="#9bd400" />
+              </marker>
+              <marker
+                id="arr-xy"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path d="M0 0 L10 5 L0 10 z" fill="#48dbe6" />
+              </marker>
+            </defs>
+
+            {/* regeneration feedback loops — value returning to its source */}
+            <path
+              d="M270 422 C110 405 95 210 152 122"
+              stroke="#ff3d17"
+              strokeWidth="1.5"
+              fill="none"
+              strokeDasharray="5 7"
+              opacity="0.55"
+              markerEnd="url(#arr-vo)"
+            />
+            <path
+              d="M490 422 C650 405 665 210 608 122"
+              stroke="#ff3d17"
+              strokeWidth="1.5"
+              fill="none"
+              strokeDasharray="5 7"
+              opacity="0.55"
+              markerEnd="url(#arr-vo)"
+            />
+            <text
+              x="380"
+              y="470"
+              textAnchor="middle"
+              fontFamily="JetBrains Mono,monospace"
+              fontSize="10"
+              fill="#857d68"
+              letterSpacing="2"
+            >
+              VALUE RETURNS — REGENERATION LOOP
+            </text>
+
+            {/* source: Voltaire */}
+            <rect x="80" y="60" width="160" height="60" rx="3" fill="rgba(255,61,23,.05)" stroke="#ff3d17" strokeWidth="1.5" />
+            <text x="160" y="94" textAnchor="middle" fontFamily="Anton,sans-serif" fontSize="22" fill="#ff3d17" letterSpacing="1">
+              VOLTAIRE
+            </text>
+            <text x="160" y="111" textAnchor="middle" fontFamily="JetBrains Mono,monospace" fontSize="9" fill="#857d68" letterSpacing="1">
+              ABUNDANCE · GROWTH
+            </text>
+
+            {/* source: Chagra */}
+            <rect x="520" y="60" width="160" height="60" rx="3" fill="rgba(155,212,0,.06)" stroke="#9bd400" strokeWidth="1.5" />
+            <text x="600" y="94" textAnchor="middle" fontFamily="Anton,sans-serif" fontSize="22" fill="#9bd400" letterSpacing="1">
+              CHAGRA
+            </text>
+            <text x="600" y="111" textAnchor="middle" fontFamily="JetBrains Mono,monospace" fontSize="9" fill="#857d68" letterSpacing="1">
+              REGENERATION · RETURN
+            </text>
+
+            {/* convergence into the proxy */}
+            <path d="M160 120 C250 152 252 178 320 200" stroke="#ff3d17" strokeWidth="1.5" fill="none" markerEnd="url(#arr-vo)" />
+            <path d="M600 120 C510 152 508 178 440 200" stroke="#9bd400" strokeWidth="1.5" fill="none" markerEnd="url(#arr-ch)" />
+            <text x="232" y="152" textAnchor="middle" fontFamily="JetBrains Mono,monospace" fontSize="10" fill="#ff3d17" letterSpacing="2">
+              ENGINE
+            </text>
+            <text x="528" y="152" textAnchor="middle" fontFamily="JetBrains Mono,monospace" fontSize="10" fill="#9bd400" letterSpacing="2">
+              CONSTRAINT
+            </text>
+
+            {/* the biomimicry proxy — hexagon with a branching-flow glyph */}
+            <polygon
+              points="380,163 442,199 442,271 380,307 318,271 318,199"
+              fill="rgba(72,219,230,.05)"
+              stroke="#48dbe6"
+              strokeWidth="1.5"
+            />
+            <g stroke="#48dbe6" strokeWidth="2" fill="none">
+              <path d="M380 290 L380 248" />
+              <path d="M380 248 L345 220" />
+              <path d="M380 248 L415 220" />
+              <path d="M345 220 L329 200" />
+              <path d="M345 220 L357 197" />
+              <path d="M415 220 L403 197" />
+              <path d="M415 220 L431 200" />
+            </g>
+            <circle cx="329" cy="200" r="2.6" fill="#c8ff2e" />
+            <circle cx="357" cy="197" r="2.6" fill="#48dbe6" />
+            <circle cx="403" cy="197" r="2.6" fill="#48dbe6" />
+            <circle cx="431" cy="200" r="2.6" fill="#c8ff2e" />
+            <text x="380" y="300" textAnchor="middle" fontFamily="JetBrains Mono,monospace" fontSize="11" fill="#48dbe6" letterSpacing="3">
+              PROXY
+            </text>
+            <text x="380" y="332" textAnchor="middle" fontFamily="Anton,sans-serif" fontSize="18" fill="#48dbe6" letterSpacing="1">
+              BIOMIMICRY PROXY
+            </text>
+            <text x="380" y="349" textAnchor="middle" fontFamily="JetBrains Mono,monospace" fontSize="9" fill="#857d68" letterSpacing="1">
+              ANTS · SLIME MOULD · RIVERS
+            </text>
+
+            {/* output into Xylem */}
+            <path d="M380 357 L380 392" stroke="#48dbe6" strokeWidth="1.5" fill="none" markerEnd="url(#arr-xy)" />
+            <text x="392" y="378" fontFamily="JetBrains Mono,monospace" fontSize="9" fill="#48dbe6" letterSpacing="1">
+              ROUTES VALUE
+            </text>
+            <rect x="270" y="392" width="220" height="60" rx="3" fill="rgba(72,219,230,.06)" stroke="#48dbe6" strokeWidth="1.5" />
+            <text x="380" y="425" textAnchor="middle" fontFamily="Anton,sans-serif" fontSize="22" fill="#48dbe6" letterSpacing="1">
+              XYLEM OF SOCIETY
+            </text>
+            <text x="380" y="442" textAnchor="middle" fontFamily="JetBrains Mono,monospace" fontSize="9" fill="#857d68" letterSpacing="1">
+              COORDINATED · REGENERATIVE ABUNDANCE
+            </text>
+          </svg>
+          <Trans k="sx.cap" className="vasc-cap" interactive={false} as="p" />
+        </div>
+        <div className="grid2 reveal" style={{ marginTop: 30 }}>
+          <Trans k="sx.p1" className="copy" as="p" />
+          <Trans k="sx.p2" className="copy" as="p" />
         </div>
       </Wrap>
     </section>
@@ -140,28 +289,22 @@ export function VascularSection() {
         <div className="s-head reveal">
           <div className="bignum">09</div>
           <div className="meta">
-            <span className="eyebrow">
-              <Trans k="s9.eye" />
-            </span>
+            <Trans k="s9.eye" className="eyebrow" interactive={false} />
             <div className="threads">
               <span className="chip xy">
-                <Trans k="t.xy" />
+                <Trans k="t.xy" interactive={false} inline />
               </span>
               <span className="chip ch">
-                <Trans k="t.ch" />
+                <Trans k="t.ch" interactive={false} inline />
               </span>
               <span className="chip vo">
-                <Trans k="t.vo" />
+                <Trans k="t.vo" interactive={false} inline />
               </span>
             </div>
-            <h2 className="s-title cursor-invert-target">
-              <Trans k="s9.title" />
-            </h2>
+            <Trans k="s9.title" className="s-title" as="h2" />
           </div>
         </div>
-        <p className="lead reveal cursor-invert-target">
-          <Trans k="s9.lead" />
-        </p>
+        <Trans k="s9.lead" className="lead reveal" as="p" />
         <div className="vasc reveal">
           <svg viewBox="0 0 760 360" aria-hidden="true">
             <defs>
@@ -254,17 +397,11 @@ export function VascularSection() {
               opacity="0.7"
             />
           </svg>
-          <p className="vasc-cap cursor-invert-target">
-            <Trans k="s9.cap" />
-          </p>
+          <Trans k="s9.cap" className="vasc-cap" interactive={false} as="p" />
         </div>
         <div className="grid2 reveal" style={{ marginTop: 30 }}>
-          <p className="copy cursor-invert-target">
-            <Trans k="s9.p1" />
-          </p>
-          <p className="copy cursor-invert-target">
-            <Trans k="s9.p2" />
-          </p>
+          <Trans k="s9.p1" className="copy" as="p" />
+          <Trans k="s9.p2" className="copy" as="p" />
         </div>
       </Wrap>
     </section>

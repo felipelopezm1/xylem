@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode, type ElementType, type CSSProperties } from 'react'
+import PretextHoverText from '../components/effects/PretextHoverText'
 
 export type Lang = 'en' | 'es'
 
@@ -57,7 +58,30 @@ export function useLanguage() {
   return ctx
 }
 
-export function Trans({ k, className }: { k: string; className?: string }) {
+export function Trans({
+  k,
+  className,
+  interactive = true,
+  as,
+  style,
+  inline,
+}: {
+  k: string
+  className?: string
+  interactive?: boolean
+  as?: ElementType
+  style?: CSSProperties
+  inline?: boolean
+}) {
   const { t } = useLanguage()
-  return <span className={className} dangerouslySetInnerHTML={{ __html: t(k) }} />
+  const html = t(k)
+
+  if (!interactive) {
+    const Tag = as || 'span'
+    return <Tag className={className} style={style} dangerouslySetInnerHTML={{ __html: html }} />
+  }
+
+  return (
+    <PretextHoverText html={html} className={className} style={style} as={as} inline={inline} />
+  )
 }

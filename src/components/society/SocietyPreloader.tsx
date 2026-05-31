@@ -11,14 +11,11 @@ export default function SocietyPreloader() {
 
   return (
     <div id="pre">
-      <div className="scream cursor-invert-target">
-        <Trans k="pre.s" />
+      <div className="scream">
+        <Trans k="pre.s" interactive={false} />
       </div>
       <div className="pct">
-        <span id="prePct">000</span>% —{' '}
-        <span className="cursor-invert-target">
-          <Trans k="pre.l" />
-        </span>
+        <span id="prePct">000</span>% — <Trans k="pre.l" interactive={false} inline />
       </div>
     </div>
   )

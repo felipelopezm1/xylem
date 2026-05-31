@@ -14,9 +14,7 @@ export default function HomePreloader() {
       <div className="pre-vein">
         <i id="preFill" />
       </div>
-      <div className="pre-line cursor-invert-target">
-        <Trans k="pre.line" />
-      </div>
+      <Trans k="pre.line" className="pre-line" interactive={false} as="div" />
       <div className="pre-pct">
         <span id="prePct">000</span>%
       </div>

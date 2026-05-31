@@ -52,16 +52,10 @@ export default function WorksSection() {
       <Wrap>
         <div className="head reveal">
           <span className="num-tag">04</span>
-          <span className="eyebrow">
-            <Trans k="wk.eye" />
-          </span>
+          <Trans k="wk.eye" className="eyebrow" interactive={false} />
         </div>
-        <h2 className="sec-title reveal cursor-invert-target">
-          <Trans k="wk.title" />
-        </h2>
-        <p className="lead reveal cursor-invert-target">
-          <Trans k="wk.lead" />
-        </p>
+        <Trans k="wk.title" className="sec-title reveal" as="h2" />
+        <Trans k="wk.lead" className="lead reveal" as="p" />
 
         <div className="works reveal">
           {WORKS.map(({ ix, title, cat, desc, href, external, arrow }) => (
@@ -72,15 +66,15 @@ export default function WorksSection() {
               {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             >
               <span className="w-ix">{ix}</span>
-              <span className="w-title cursor-invert-target">
-                <Trans k={title} />
+              <span className="w-title">
+                <Trans k={title} inline />
               </span>
               <span className="w-meta">
                 <em className="w-cat">
-                  <Trans k={cat} />
+                  <Trans k={cat} interactive={false} inline />
                 </em>
                 <span className="w-desc">
-                  <Trans k={desc} />
+                  <Trans k={desc} interactive={false} />
                 </span>
               </span>
               <span className="w-go">{arrow}</span>

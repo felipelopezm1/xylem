@@ -22,8 +22,9 @@ export default function HomePage() {
 
   useEffect(() => {
     document.title = 'XYLEM — Biomimicry × Agentic AI · Felipe López Mantilla'
-    document.body.style.background = 'var(--bg)'
-    document.body.style.color = 'var(--ink)'
+    document.body.classList.add('page-home')
+    document.body.classList.remove('page-society')
+    return () => document.body.classList.remove('page-home')
   }, [])
 
   return (

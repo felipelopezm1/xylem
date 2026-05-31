@@ -13,28 +13,18 @@ export default function CoevolutionSection() {
       <Wrap>
         <div className="head reveal">
           <span className="num-tag">03</span>
-          <span className="eyebrow">
-            <Trans k="co.eye" />
-          </span>
+          <Trans k="co.eye" className="eyebrow" interactive={false} />
         </div>
-        <h2 className="sec-title reveal cursor-invert-target">
-          <Trans k="co.title" />
-        </h2>
-        <p className="lead reveal cursor-invert-target">
-          <Trans k="co.lead" />
-        </p>
+        <Trans k="co.title" className="sec-title reveal" as="h2" />
+        <Trans k="co.lead" className="lead reveal" as="p" />
         <div className="tri reveal">
           {ROOTS.map(({ word, title, desc }) => (
             <div key={word}>
               <div className="w">
-                <Trans k={word} />
+                <Trans k={word} interactive={false} />
               </div>
-              <h3 className="cursor-invert-target">
-                <Trans k={title} />
-              </h3>
-              <p className="cursor-invert-target">
-                <Trans k={desc} />
-              </p>
+              <Trans k={title} as="h3" />
+              <Trans k={desc} as="p" />
             </div>
           ))}
         </div>

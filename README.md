@@ -6,6 +6,7 @@ Biomimicry × Agentic AI — a modular React site for the Xylem research project
 
 - [Vite](https://vitejs.dev/) + [React](https://react.dev/) + TypeScript
 - [React Router](https://reactrouter.com/) for multi-page routing
+- [@chenglou/pretext](https://github.com/chenglou/pretext) for per-character hover typography
 - Deployed on [Vercel](https://vercel.com/)
 
 ## Pages
