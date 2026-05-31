@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XYLEM — Biomimicry × Agentic AI · Felipe López Mantilla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#060b1a;
+    --bg-2:#0a1228;
+    --ink:#eef2f7;
+    --muted:#7c89a8;
+    --muted-2:#4a567a;
+    --blue:#2348d4;
+    --blue-deep:#15267e;
+    --cyan:#48dbe6;
+    --cyan-soft:#7ce9e6;
+    --green:#83e08a;
+    --clay:#e0bb8c;
+    --clay-deep:#b5824f;
+    --line:rgba(124,137,168,.18);
+    --line-soft:rgba(124,137,168,.10);
+    --serif:'Fraunces',Georgia,serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --maxw:1280px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-optical-sizing:auto;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body.locked{overflow:hidden;height:100vh}
+  ::selection{background:var(--cyan);color:#04122b}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  .mono{font-family:var(--mono)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,64px)}
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--cyan);font-weight:500;
+  }
+  .num-tag{
+    font-family:var(--mono);font-size:12px;letter-spacing:.2em;
+    color:var(--muted);font-weight:500;
+  }
+
+  /* ---------- PRELOADER ---------- */
+  #pre{
+    position:fixed;inset:0;z-index:9999;background:var(--bg);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transition:opacity .9s ease,visibility .9s ease;
+  }
+  #pre.done{opacity:0;visibility:hidden}
+  .pre-vein{width:2px;height:160px;background:var(--line);position:relative;overflow:hidden;border-radius:2px}
+  .pre-vein i{position:absolute;left:0;bottom:0;width:100%;height:0;background:linear-gradient(0deg,var(--green),var(--cyan));box-shadow:0 0 14px var(--cyan)}
+  .pre-line{font-family:var(--serif);font-style:italic;font-size:clamp(15px,2.4vw,22px);color:var(--muted);margin-top:28px;letter-spacing:.01em}
+  .pre-pct{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--cyan);margin-top:10px}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:900;
+    transition:background .4s ease,border-color .4s ease,padding .4s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.solid{background:rgba(6,11,26,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:baseline;gap:10px;font-family:var(--mono);font-weight:700;letter-spacing:.18em;font-size:15px}
+  .brand .dot{width:8px;height:8px;background:var(--cyan);border-radius:50%;box-shadow:0 0 10px var(--cyan);display:inline-block;transform:translateY(-1px)}
+  .brand b{color:var(--ink)}
+  .navlinks{display:flex;gap:30px;align-items:center}
+  .navlinks a{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .25s}
+  .navlinks a:hover{color:var(--cyan)}
+  .lang{display:flex;font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .lang button{background:none;border:0;color:var(--muted);padding:6px 12px;cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.1em;transition:.25s}
+  .lang button.on{background:var(--cyan);color:#04122b;font-weight:700}
+  .burger{display:none;background:none;border:0;color:var(--ink);cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.15em}
+
+  /* ---------- VEIN BACKGROUND ---------- */
+  .veins{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  .veins path{fill:none;stroke-linecap:round}
+  .flow{stroke-dasharray:6 200;animation:flow 6s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-1030}}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 80% -10%,rgba(35,72,212,.42),transparent 55%),
+      radial-gradient(90% 70% at 0% 110%,rgba(72,219,230,.12),transparent 60%),
+      var(--bg);
+  }
+  .hero .wrap{position:relative;z-index:2;width:100%;padding-top:100px;padding-bottom:60px}
+  .hero-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:48px;align-items:center}
+  .epigraph{font-style:italic;font-weight:300;color:var(--cyan-soft);font-size:clamp(15px,1.7vw,19px);max-width:30ch;margin-bottom:30px;opacity:0;animation:rise .9s .2s forwards}
+  h1.title{font-weight:600;line-height:.92;letter-spacing:-.02em;font-size:clamp(64px,15vw,210px);opacity:0;animation:rise 1s .35s forwards}
+  h1.title .x{font-style:italic;font-weight:300;color:var(--cyan)}
+  .subtitle{font-family:var(--mono);font-size:clamp(13px,1.5vw,16px);letter-spacing:.06em;color:var(--ink);max-width:46ch;margin-top:26px;line-height:1.7;opacity:0;animation:rise 1s .55s forwards}
+  .by{margin-top:34px;display:flex;flex-wrap:wrap;gap:8px 26px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);opacity:0;animation:rise 1s .7s forwards}
+  .by b{color:var(--cyan)}
+  .cta-row{margin-top:38px;display:flex;flex-wrap:wrap;gap:14px;opacity:0;animation:rise 1s .85s forwards}
+  .btn{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:14px 24px;border-radius:2px;border:1px solid var(--line);color:var(--ink);transition:.3s;cursor:pointer;background:none}
+  .btn:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px)}
+  .btn.fill{background:var(--cyan);color:#04122b;border-color:var(--cyan);font-weight:700}
+  .btn.fill:hover{background:var(--cyan-soft);color:#04122b}
+  .btn.society{border-color:#c8ff2e;color:#c8ff2e;position:relative}
+  .btn.society:hover{background:#c8ff2e;color:#0c0a07;border-color:#c8ff2e;transform:translateY(-2px)}
+
+  /* ASCII panel */
+  .ascii{
+    font-family:var(--mono);font-size:clamp(9px,1.02vw,12px);line-height:1.5;
+    color:var(--cyan-soft);white-space:pre;border:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(72,219,230,.05),rgba(35,72,212,.05));
+    padding:22px;border-radius:4px;overflow:auto;
+    box-shadow:0 30px 80px -40px rgba(72,219,230,.4);
+    opacity:0;animation:rise 1s .6s forwards;
+  }
+  .ascii .hl{color:var(--green)}
+  .ascii .dim{color:var(--muted-2)}
+
+  .scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px}
+  .scrollcue .bar{width:1px;height:40px;background:linear-gradient(var(--cyan),transparent);animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block{position:relative;padding:clamp(90px,13vw,180px) 0;border-top:1px solid var(--line-soft)}
+  .head{display:flex;align-items:baseline;gap:18px;margin-bottom:14px}
+  .sec-title{font-weight:500;letter-spacing:-.02em;line-height:1.02;font-size:clamp(34px,6vw,76px)}
+  .sec-title em{font-style:italic;font-weight:300;color:var(--cyan)}
+  .lead{font-size:clamp(18px,2.1vw,25px);font-weight:300;color:var(--ink);max-width:60ch;margin-top:22px;line-height:1.5}
+  .body-copy{color:var(--muted);font-size:clamp(15px,1.5vw,17px);max-width:62ch;margin-top:20px;line-height:1.7}
+  .body-copy.ink{color:#c7d0e2}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- PROLOGUE ---------- */
+  .prologue{background:linear-gradient(180deg,var(--bg),var(--bg-2));text-align:center}
+  .prologue .big{font-style:italic;font-weight:300;font-size:clamp(26px,4.6vw,58px);line-height:1.25;letter-spacing:-.01em;max-width:20ch;margin:0 auto;color:var(--ink)}
+  .prologue .big span{color:var(--cyan)}
+  .prologue .sig{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:48px}
+
+  /* ---------- TWO-COL ---------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,90px);align-items:start}
+  .term{
+    font-family:var(--mono);font-size:13px;line-height:1.85;color:var(--cyan-soft);
+    border:1px solid var(--line);border-radius:4px;background:rgba(10,18,40,.6);
+    overflow:hidden;
+  }
+  .term .bar{display:flex;align-items:center;gap:7px;padding:11px 16px;border-bottom:1px solid var(--line);background:rgba(72,219,230,.04)}
+  .term .bar i{width:9px;height:9px;border-radius:50%;background:var(--muted-2)}
+  .term .bar i:nth-child(2){background:var(--clay-deep)}
+  .term .bar i:nth-child(3){background:var(--green)}
+  .term .bar span{margin-left:auto;font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+  .term .body{padding:20px 22px;white-space:pre-wrap}
+  .term .c{color:var(--green)} .term .k{color:var(--clay)} .term .d{color:var(--muted-2)}
+
+  /* ---------- LAYER CARDS ---------- */
+  .layers{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:54px}
+  .layer{border:1px solid var(--line);border-radius:4px;padding:24px 20px 26px;background:rgba(10,18,40,.45);position:relative;overflow:hidden;transition:.4s;min-height:230px;display:flex;flex-direction:column}
+  .layer:hover{border-color:var(--cyan);transform:translateY(-5px);background:rgba(35,72,212,.14)}
+  .layer .gl{position:absolute;inset:auto -40% -60% -40%;height:120px;background:radial-gradient(closest-side,var(--c,var(--cyan)),transparent);opacity:.18;filter:blur(8px);transition:.4s}
+  .layer:hover .gl{opacity:.5}
+  .layer .ix{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted)}
+  .layer .gly{font-size:34px;line-height:1;margin:16px 0 14px;font-family:var(--mono);color:var(--c,var(--cyan));font-weight:700}
+  .layer h4{font-weight:600;font-size:20px;letter-spacing:-.01em}
+  .layer .role{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--c,var(--cyan));margin-top:4px}
+  .layer p{color:var(--muted);font-size:13.5px;margin-top:14px;line-height:1.6;font-family:var(--mono);font-weight:300}
+
+  /* iso motif */
+  .iso-wrap{position:relative}
+  .iso-cap{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:18px;text-align:center}
+  .vid{position:relative;width:100%;padding-top:56.25%;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:rgba(10,18,40,.6);box-shadow:0 40px 100px -50px rgba(72,219,230,.45)}
+  .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* ---------- CHAGRA ---------- */
+  .chagra{background:
+    radial-gradient(80% 70% at 10% 0%,rgba(131,224,138,.10),transparent 60%),
+    radial-gradient(70% 60% at 100% 100%,rgba(224,187,140,.10),transparent 60%),
+    linear-gradient(180deg,var(--bg-2),#0c0f1c);}
+  .chagra .eyebrow{color:var(--green)}
+  .chagra .sec-title em{color:var(--green)}
+  .clay-line{height:1px;background:linear-gradient(90deg,transparent,var(--clay-deep),transparent);margin:0 auto;max-width:200px}
+  .rings{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:60px}
+  .ring{border-top:1px solid var(--line);padding-top:20px}
+  .ring .n{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--green)}
+  .ring h5{font-weight:600;font-size:19px;margin-top:12px}
+  .ring p{color:var(--muted);font-size:13.5px;font-family:var(--mono);font-weight:300;margin-top:10px;line-height:1.6}
+
+  /* ---------- TRIPTYCH ---------- */
+  .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:60px;border:1px solid var(--line)}
+  .tri > div{padding:clamp(28px,4vw,52px);border-right:1px solid var(--line);position:relative;transition:.4s}
+  .tri > div:last-child{border-right:0}
+  .tri > div:hover{background:rgba(72,219,230,.05)}
+  .tri .w{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan)}
+  .tri h3{font-weight:300;font-style:italic;font-size:clamp(30px,4vw,46px);margin:14px 0 16px;letter-spacing:-.01em}
+  .tri p{color:var(--muted);font-size:14.5px;line-height:1.65}
+
+  /* ---------- METRICS ---------- */
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+  .metric{background:var(--bg);padding:clamp(28px,4vw,48px) 26px;text-align:left}
+  .metric .v{font-weight:300;font-size:clamp(36px,5.4vw,66px);letter-spacing:-.03em;line-height:1;color:var(--cyan)}
+  .metric .v em{font-style:italic;color:var(--green)}
+  .metric .l{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+
+  /* ---------- FAQ ---------- */
+  .faq{border-top:1px solid var(--line)}
+  .faq .item{border-bottom:1px solid var(--line)}
+  .faq button{width:100%;background:none;border:0;color:var(--ink);cursor:pointer;text-align:left;
+    display:flex;gap:22px;align-items:baseline;padding:30px 0;font-family:var(--serif);font-size:clamp(19px,2.4vw,28px);font-weight:400;letter-spacing:-.01em}
+  .faq button .q-n{font-family:var(--mono);font-size:13px;color:var(--cyan);letter-spacing:.1em;flex:none}
+  .faq button .q-t{flex:1}
+  .faq button .pm{font-family:var(--mono);font-size:24px;color:var(--muted);flex:none;transition:transform .4s}
+  .faq .item.open .pm{transform:rotate(45deg);color:var(--cyan)}
+  .faq .ans{max-height:0;overflow:hidden;transition:max-height .5s ease}
+  .faq .ans p{color:var(--muted);font-size:clamp(15px,1.5vw,17px);line-height:1.7;padding:0 0 30px 52px;max-width:74ch}
+
+  /* ---------- WORKS ---------- */
+  .works{margin-top:54px;border-top:1px solid var(--line)}
+  .work{display:grid;grid-template-columns:54px 1fr 1.45fr 30px;gap:26px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line);transition:padding .35s ease,background .35s ease;position:relative}
+  .work:hover{padding-left:18px;background:linear-gradient(90deg,rgba(72,219,230,.07),transparent 70%)}
+  .work .w-ix{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.2em;align-self:start;padding-top:8px}
+  .work .w-title{font-family:var(--serif);font-size:clamp(24px,3.3vw,42px);font-weight:500;letter-spacing:-.02em;line-height:1.02;transition:color .3s}
+  .work:hover .w-title{color:var(--cyan)}
+  .work .w-meta{display:flex;flex-direction:column;gap:9px}
+  .work .w-cat{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);font-style:normal}
+  .work .w-desc{font-family:var(--mono);font-size:13px;font-weight:300;color:var(--muted);line-height:1.6}
+  .work .w-go{font-family:var(--mono);font-size:20px;color:var(--muted);justify-self:end;align-self:start;padding-top:6px;transition:transform .35s ease,color .3s}
+  .work:hover .w-go{color:var(--cyan);transform:translate(4px,-4px)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:linear-gradient(180deg,#0c0f1c,#05080f);border-top:1px solid var(--line);padding:clamp(80px,11vw,140px) 0 50px}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;align-items:start}
+  .foot-big{font-weight:300;font-style:italic;font-size:clamp(28px,4vw,52px);line-height:1.2;letter-spacing:-.01em;max-width:18ch}
+  .foot-big span{color:var(--cyan)}
+  .foot-col h6{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+  .foot-col a,.foot-col p{display:block;font-family:var(--mono);font-size:13px;color:var(--ink);margin-bottom:12px;transition:.25s}
+  .foot-col a:hover{color:var(--cyan)}
+  .foot-bottom{margin-top:clamp(60px,9vw,110px);padding-top:28px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:1000px){
+    .hero-grid{grid-template-columns:1fr;gap:36px}
+    .ascii{order:2}
+    .split{grid-template-columns:1fr}
+    .layers{grid-template-columns:repeat(2,1fr)}
+    .rings{grid-template-columns:repeat(2,1fr)}
+    .tri{grid-template-columns:1fr}
+    .tri > div{border-right:0;border-bottom:1px solid var(--line)}
+    .tri > div:last-child{border-bottom:0}
+    .metrics{grid-template-columns:repeat(2,1fr)}
+    .foot-top{grid-template-columns:1fr}
+    .work{grid-template-columns:40px 1fr 26px;gap:16px;align-items:start}
+    .work .w-meta{grid-column:2;margin-top:12px}
+    .work .w-ix{padding-top:6px}
+  }
+  @media(max-width:640px){
+    .navlinks{display:none}
+    .burger{display:block}
+    .navlinks.show{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;gap:20px;background:rgba(6,11,26,.97);padding:30px clamp(20px,5vw,64px);border-bottom:1px solid var(--line)}
+    .layers{grid-template-columns:1fr}
+    .rings{grid-template-columns:1fr}
+    .by{font-size:10px}
+  }
+</style>
+</head>
+<body class="locked">
+
+<!-- ===== PRELOADER ===== -->
+<div id="pre">
+  <div class="pre-vein"><i id="preFill"></i></div>
+  <div class="pre-line" data-i18n="pre.line">nature as model · measure · mentor</div>
+  <div class="pre-pct"><span id="prePct">000</span>%</div>
+</div>
+
+<!-- ===== NAV ===== -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#top" class="brand"><span class="dot"></span><b>XYLEM</b><span style="color:var(--muted);font-weight:400;letter-spacing:.1em">/ symbiotic code</span></a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#code" data-i18n="nav.code">The Code</a>
+      <a href="#xylem" data-i18n="nav.xylem">Xylem</a>
+      <a href="#chagra" data-i18n="nav.chagra">The Chagra</a>
+      <a href="#coevo" data-i18n="nav.coevo">Co-evolution</a>
+      <a href="#works" data-i18n="nav.works">Works</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div style="display:flex;gap:14px;align-items:center">
+      <div class="lang">
+        <button id="enBtn" class="on" onclick="setLang('en')">EN</button>
+        <button id="esBtn" onclick="setLang('es')">ES</button>
+      </div>
+      <button class="burger" id="burger" aria-label="menu">MENU</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <svg class="veins" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="rgba(124,137,168,.13)" stroke-width="1">
+      <path d="M120 950 C120 700 60 600 120 420 C160 300 120 180 200 40"/>
+      <path d="M420 950 C420 680 480 560 420 380 C380 250 440 140 380 0"/>
+      <path d="M720 980 C720 700 720 560 720 360 C720 220 720 120 720 -20"/>
+      <path d="M1020 950 C1020 690 960 560 1020 380 C1060 250 1000 140 1060 0"/>
+      <path d="M1320 950 C1320 700 1380 600 1320 420 C1280 300 1340 180 1260 40"/>
+    </g>
+    <g stroke="url(#cg)" stroke-width="1.4">
+      <path class="flow" style="animation-delay:0s" d="M120 950 C120 700 60 600 120 420 C160 300 120 180 200 40"/>
+      <path class="flow" style="animation-delay:1.4s" d="M420 950 C420 680 480 560 420 380 C380 250 440 140 380 0"/>
+      <path class="flow" style="animation-delay:.7s" d="M720 980 C720 700 720 560 720 360 C720 220 720 120 720 -20"/>
+      <path class="flow" style="animation-delay:2.1s" d="M1020 950 C1020 690 960 560 1020 380 C1060 250 1000 140 1060 0"/>
+      <path class="flow" style="animation-delay:1s" d="M1320 950 C1320 700 1380 600 1320 420 C1280 300 1340 180 1260 40"/>
+    </g>
+    <defs>
+      <linearGradient id="cg" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0" stop-color="#83e08a"/>
+        <stop offset="1" stop-color="#48dbe6"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="epigraph" data-i18n="hero.epi">“Intelligence is never detached from form — the curve of a wing, the branching of a root, the signal of a pheromone all carry meaning.”</p>
+        <h1 class="title">X<span class="x">y</span>lem</h1>
+        <p class="subtitle" data-i18n="hero.sub">Biomimicry + Agentic AI for task optimisation in 3D simulation. A research practice where nature is read as model, measure and mentor — and code learns to cooperate with life.</p>
+        <div class="by">
+          <span data-i18n="hero.by1">MSc. Felipe López Mantilla</span>
+          <span data-i18n="hero.by2"><b>UAL CCI</b></span>
+        </div>
+        <div class="cta-row">
+          <a href="#xylem" class="btn fill" data-i18n="hero.cta1">Enter the simulation</a>
+          <a href="#code" class="btn" data-i18n="hero.cta2">Read the code</a>
+          <a href="./xylem-of-society.html" class="btn society" data-i18n="hero.cta3">Xylem of Society ↗</a>
+        </div>
+      </div>
+      <pre class="ascii">+----------------------------------------+
+| <span class="hl">XYLEM // SYMBIOTIC CODE</span>     <span class="dim">v.2026</span> |
+|----------------------------------------|
+| 001  HUMAN        <span class="dim">benchmark layer</span>     |
+| 010  DIJKSTRA     <span class="dim">shortest path</span>       |
+| 011  ANTS         <span class="dim">colony intelligence</span> |
+| 100  PHYSARUM     <span class="dim">slime pathfinding</span>   |
+| 101  RIVER/STEINER <span class="dim">flow networks</span>     |
+|----------------------------------------|
+| MODEL · MEASURE · MENTOR               |
+|         _   _   _                      |
+|        ( `-' )-'( `-.                   |
+|     ~ nature ~ machine ~ human ~       |
++----------------------------------------+</pre>
+    </div>
+  </div>
+  <div class="scrollcue"><span data-i18n="hero.scroll">scroll</span><span class="bar"></span></div>
+</section>
+
+<!-- ===== PROLOGUE ===== -->
+<section class="block prologue">
+  <div class="wrap reveal">
+    <p class="eyebrow" style="text-align:center;margin-bottom:34px" data-i18n="pro.eye">Prologue</p>
+    <p class="big" data-i18n="pro.big">At its core, biomimicry and artificial intelligence share one idea: the <span>mimic</span> — a system that adapts its context and needs into a form that can learn, behave and act within a living world.</p>
+    <p class="sig" data-i18n="pro.sig">— The Symbiotic Code · Chapter III</p>
+  </div>
+</section>
+
+<!-- ===== THE CODE ===== -->
+<section class="block" id="code">
+  <div class="wrap">
+    <div class="head reveal"><span class="num-tag">00</span><span class="eyebrow" data-i18n="code.eye">The Symbiotic Code</span></div>
+    <h2 class="sec-title reveal" data-i18n="code.title">Human · machine · nature, <em>co-evolving</em></h2>
+    <div class="split" style="margin-top:50px">
+      <div class="reveal">
+        <p class="lead" data-i18n="code.lead">A philosophical–scientific paradigm in which computer systems mimic and interpret natural reasoning — not to replace human agency, but to cooperate with it and situate it within ecological balance.</p>
+        <p class="body-copy" data-i18n="code.p1">Biomimicry here is not ornamental borrowing. It is a methodological and ethical reorientation: nature read as model, measure and mentor. Mimesis is not mere copying but learning through attentive relation — understanding the intelligence embedded in form, behaviour and interdependence rather than reproducing the surface of a leaf, a shell, a colony.</p>
+        <p class="body-copy" data-i18n="code.p2">Measurable objectives, governance and safety are not external controls added after design. They are part of the design logic itself.</p>
+      </div>
+      <div class="term reveal">
+        <div class="bar"><i></i><i></i><i></i><span>principles.md</span></div>
+        <div class="body"><span class="d"># principles for co-evolution</span>
+<span class="k">relation</span>     : intelligence is distributed & situated
+<span class="k">interpretation</span>: meaning is enacted, not stored
+<span class="k">adaptation</span>   : local rules → global organisation
+<span class="k">responsibility</span>: cooperation ≠ domination
+<span class="k">care</span>         : assistance ≠ dependency
+
+<span class="c">> "in the presence of a complex pattern</span>
+<span class="c">   there is a good chance that a very</span>
+<span class="c">   simple process is responsible for it."</span>
+<span class="d">  — Peitgen, Jürgens & Saupe</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== XYLEM SIMULATION ===== -->
+<section class="block" id="xylem" style="background:radial-gradient(90% 80% at 90% 0%,rgba(35,72,212,.18),transparent 55%)">
+  <div class="wrap">
+    <div class="head reveal"><span class="num-tag">01</span><span class="eyebrow" data-i18n="xy.eye">The Simulation</span></div>
+    <h2 class="sec-title reveal" data-i18n="xy.title">Agents that move like <em>nature</em> moves</h2>
+    <p class="lead reveal" data-i18n="xy.q">How can biomimetic principles integrate with Agentic AI in a dynamic 3D environment to simulate human-centred task systems?</p>
+    <p class="body-copy ink reveal" data-i18n="xy.p1">Inside a deterministic proxy — a simple “make a sandwich” flow of pick → stage → assemble → hand-off — agents are governed by interchangeable layers of intelligence. A Python decision bridge calls a language model for staging, drop-off and sprint choices, while each layer carries its own logic, from rigid rules to living, pheromone-led adaptation. The challenge: reduce collisions, re-crossings and idle staging, and meet or beat the baselines — reproducibly.</p>
+
+    <div class="layers">
+      <div class="layer reveal" style="--c:#c7d0e2"><span class="gl"></span><div class="ix">001</div><div class="gly">☉</div><h4 data-i18n="xy.l1.t">Human</h4><div class="role" data-i18n="xy.l1.r">benchmark</div><p data-i18n="xy.l1.d">How a person would understand and complete the task — the reference everything is measured against.</p></div>
+      <div class="layer reveal" style="--c:#7ce9e6"><span class="gl"></span><div class="ix">010</div><div class="gly">⌁</div><h4 data-i18n="xy.l2.t">Dijkstra</h4><div class="role" data-i18n="xy.l2.r">shortest path</div><p data-i18n="xy.l2.d">Pure weighted shortest path between nodes — efficient, but blind to staging and hand-off behaviour.</p></div>
+      <div class="layer reveal" style="--c:#48dbe6"><span class="gl"></span><div class="ix">011</div><div class="gly">⫶</div><h4 data-i18n="xy.l3.t">Ants</h4><div class="role" data-i18n="xy.l3.r">colony intelligence</div><p data-i18n="xy.l3.d">Social biomimicry — pheromone trails and reciprocity for coordination and reduced collisions.</p></div>
+      <div class="layer reveal" style="--c:#83e08a"><span class="gl"></span><div class="ix">100</div><div class="gly">⟜</div><h4 data-i18n="xy.l4.t">Physarum</h4><div class="role" data-i18n="xy.l4.r">slime pathfinding</div><p data-i18n="xy.l4.d">Slime-mould logic that “learns” efficient routes through multi-source, obstacle-rich space.</p></div>
+      <div class="layer reveal" style="--c:#e0bb8c"><span class="gl"></span><div class="ix">101</div><div class="gly">⋔</div><h4 data-i18n="xy.l5.t">River / Steiner</h4><div class="role" data-i18n="xy.l5.r">flow networks</div><p data-i18n="xy.l5.d">Branching flow geometries that minimise total network cost — the way water and roots distribute.</p></div>
+    </div>
+
+    <div class="iso-wrap reveal" style="margin-top:70px">
+      <div class="vid">
+        <iframe src="https://www.youtube-nocookie.com/embed/CtQIhM4RpXQ" title="Xylem — Biomimicry + Agentic AI simulation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="iso-cap" data-i18n="xy.iso">Level 1 · Seed 33333 · Order 2413 · 1550 runs — a lattice of identical arenas, one decision policy each</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== METRICS ===== -->
+<section class="block" style="padding-top:0;border-top:0">
+  <div class="wrap reveal">
+    <div class="metrics">
+      <div class="metric"><div class="v">5</div><div class="l" data-i18n="m.l1">biomimetic layers</div></div>
+      <div class="metric"><div class="v">1550</div><div class="l" data-i18n="m.l2">simulation runs</div></div>
+      <div class="metric"><div class="v"><em>3</em></div><div class="l" data-i18n="m.l3">sub-layers per species · LLM / hybrid / rule</div></div>
+      <div class="metric"><div class="v">33333</div><div class="l" data-i18n="m.l4">level 1 seed</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHAGRA ===== -->
+<section class="block chagra" id="chagra">
+  <div class="wrap">
+    <div class="head reveal"><span class="num-tag">02</span><span class="eyebrow" data-i18n="ch.eye">The Chagra · A Living Model</span></div>
+    <h2 class="sec-title reveal" data-i18n="ch.title">Knowledge that is <em>cultivated</em>, not stored</h2>
+    <div class="split" style="margin-top:50px">
+      <div class="reveal">
+        <p class="lead" data-i18n="ch.lead">The Amazonian chagra is not only an agricultural space. It is a system of coexistence, sequence, care and regeneration — a model for how intelligence can be layered, relational and brought to life through use.</p>
+        <p class="body-copy" data-i18n="ch.p1">Built by Indigenous peoples of the Colombian Amazon, the chagra mimics the forest's own cycles of energy and matter. What is planted, harvested, left to recover, shared and learned again moves like a trophic chain — from observation to interpretation, application, transmission, and back into revision. It resists the flattening of digital abundance, where all information appears equally available even when it is not equally grounded.</p>
+        <p class="body-copy" data-i18n="ch.p2">It is one of the clearest living examples of synergy between humanity and nature — and a warning: this agrobiodiversity is being lost as cultivation gives way to consumption.</p>
+      </div>
+      <div class="reveal">
+        <div class="rings">
+          <div class="ring"><div class="n">01</div><h5 data-i18n="ch.r1.t">Plant</h5><p data-i18n="ch.r1.d">cues for immediate action</p></div>
+          <div class="ring"><div class="n">02</div><h5 data-i18n="ch.r2.t">Harvest</h5><p data-i18n="ch.r2.d">depth, hierarchy, validation</p></div>
+          <div class="ring"><div class="n">03</div><h5 data-i18n="ch.r3.t">Recover</h5><p data-i18n="ch.r3.d">letting ground regenerate</p></div>
+          <div class="ring"><div class="n">04</div><h5 data-i18n="ch.r4.t">Transmit</h5><p data-i18n="ch.r4.d">knowledge reborn through use</p></div>
+        </div>
+        <pre class="ascii" style="margin-top:34px;color:var(--green);box-shadow:none;border-color:var(--line)">  ~ trophic chain of knowledge ~
+
+  observe → interpret → apply
+      ↑                    │
+      └──── revise ←── transmit</pre>
+      </div>
+    </div>
+    <div class="clay-line" style="margin-top:80px"></div>
+  </div>
+</section>
+
+<!-- ===== CO-EVOLUTION TRIPTYCH ===== -->
+<section class="block" id="coevo">
+  <div class="wrap">
+    <div class="head reveal"><span class="num-tag">03</span><span class="eyebrow" data-i18n="co.eye">Three Roots</span></div>
+    <h2 class="sec-title reveal" data-i18n="co.title">Beyond <em>anthropocentrism</em></h2>
+    <p class="lead reveal" data-i18n="co.lead">Not a hierarchy where one dominates and the others obey — nor the fantasy of a frictionless merger. A more demanding view: human-centred systems that remain accountable to life-centred principles.</p>
+    <div class="tri reveal">
+      <div><div class="w" data-i18n="co.h.w">Human</div><h3 data-i18n="co.h.t">agency</h3><p data-i18n="co.h.d">The agent remains present, but its perception, timing and choices are restructured by designed mediators. Relational, not merely autonomous.</p></div>
+      <div><div class="w" data-i18n="co.m.w">Machine</div><h3 data-i18n="co.m.t">inference</h3><p data-i18n="co.m.d">A relational technology with real influence — a partner in complexity that interprets needs and detects patterns, without pretending to a self it does not yet have.</p></div>
+      <div><div class="w" data-i18n="co.n.w">Nature</div><h3 data-i18n="co.n.t">wisdom</h3><p data-i18n="co.n.d">Mutualism, signalling, distributed intelligence and adaptive coordination — coexistence that needs no sameness of identity to be meaningful.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORKS ===== -->
+<section class="block" id="works" style="background:radial-gradient(80% 70% at 0% 0%,rgba(72,219,230,.09),transparent 55%)">
+  <div class="wrap">
+    <div class="head reveal"><span class="num-tag">04</span><span class="eyebrow" data-i18n="wk.eye">Works · The Wider Practice</span></div>
+    <h2 class="sec-title reveal" data-i18n="wk.title">One root system, many <em>branches</em></h2>
+    <p class="lead reveal" data-i18n="wk.lead">Xylem is one node in a wider body of work — research, writing, regenerative platforms and production tools that share a single thread: nature read as model, measure and mentor.</p>
+
+    <div class="works reveal">
+      <a class="work" href="#top">
+        <span class="w-ix">01</span>
+        <span class="w-title" data-i18n="wk.1.t">Xylem</span>
+        <span class="w-meta"><em class="w-cat" data-i18n="wk.1.c">research · simulation</em><span class="w-desc" data-i18n="wk.1.d">Biomimicry + Agentic AI for task optimisation in 3D simulation. You are here.</span></span>
+        <span class="w-go">↘</span>
+      </a>
+      <a class="work" href="#code">
+        <span class="w-ix">02</span>
+        <span class="w-title" data-i18n="wk.2.t">The Symbiotic Code</span>
+        <span class="w-meta"><em class="w-cat" data-i18n="wk.2.c">writing · CRC Press</em><span class="w-desc" data-i18n="wk.2.d">Principles for human–machine–nature co-evolution — a book chapter on symbiotic AI.</span></span>
+        <span class="w-go">↘</span>
+      </a>
+      <a class="work" href="https://chagra-net.vercel.app/en" target="_blank" rel="noopener">
+        <span class="w-ix">03</span>
+        <span class="w-title" data-i18n="wk.3.t">CHAGRA-NET</span>
+        <span class="w-meta"><em class="w-cat" data-i18n="wk.3.c">platform · regenerative</em><span class="w-desc" data-i18n="wk.3.d">A solarpunk living corridor connecting digital nomads and Indigenous communities across Leticia, La Pedrera, Manaus and Belém — biomimicry as governance, aligned with COP30.</span></span>
+        <span class="w-go">↗</span>
+      </a>
+      <a class="work" href="https://sketch-real-mvp.vercel.app/" target="_blank" rel="noopener">
+        <span class="w-ix">04</span>
+        <span class="w-title" data-i18n="wk.4.t">sketch-real</span>
+        <span class="w-meta"><em class="w-cat" data-i18n="wk.4.c">tool · cinematography</em><span class="w-desc" data-i18n="wk.4.d">Turn rough sketches into photoreal cinematography plates from a script-style brief, powered by nano-banana-pro on fal.ai.</span></span>
+        <span class="w-go">↗</span>
+      </a>
+      <a class="work" href="https://letrina-store.vercel.app/" target="_blank" rel="noopener">
+        <span class="w-ix">05</span>
+        <span class="w-title" data-i18n="wk.5.t">Letrina</span>
+        <span class="w-meta"><em class="w-cat" data-i18n="wk.5.c">shop · software drops</em><span class="w-desc" data-i18n="wk.5.d">A dark little archive of one-time software drops. No accounts — pay once, keep the purchase ID.</span></span>
+        <span class="w-go">↗</span>
+      </a>
+      <a class="work" href="https://portfolio-felipe-lopez.vercel.app/" target="_blank" rel="noopener">
+        <span class="w-ix">06</span>
+        <span class="w-title" data-i18n="wk.6.t">Portfolio</span>
+        <span class="w-meta"><em class="w-cat" data-i18n="wk.6.c">index · Felipe López Mantilla</em><span class="w-desc" data-i18n="wk.6.d">The full body of creative-technology, UX and research work — where every branch connects back to one practice.</span></span>
+        <span class="w-go">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="block" style="background:linear-gradient(180deg,var(--bg),var(--bg-2))">
+  <div class="wrap">
+    <div class="head reveal"><span class="num-tag">05</span><span class="eyebrow" data-i18n="q.eye">Key Questions</span></div>
+    <h2 class="sec-title reveal" style="margin-bottom:50px" data-i18n="q.title">All you need <em>to know</em></h2>
+    <div class="faq reveal" id="faq">
+      <div class="item"><button><span class="q-n">01</span><span class="q-t" data-i18n="q.1.q">What is Xylem, in one sentence?</span><span class="pm">+</span></button><div class="ans"><p data-i18n="q.1.a">A research framework that operationalises biomimicry in computational terms — translating principles like reciprocity, colony intelligence and adaptive flow into measurable improvements in how AI agents complete human-centred tasks.</p></div></div>
+      <div class="item"><button><span class="q-n">02</span><span class="q-t" data-i18n="q.2.q">Why is it called Xylem?</span><span class="pm">+</span></button><div class="ans"><p data-i18n="q.2.a">Xylem is the vascular tissue that carries water and nutrients upward through a plant — a quiet network that connects roots to leaves. It is the metaphor for this work: the channel through which nature's wisdom, machine inference and human need flow into one another.</p></div></div>
+      <div class="item"><button><span class="q-n">03</span><span class="q-t" data-i18n="q.3.q">What do the layers actually do?</span><span class="pm">+</span></button><div class="ans"><p data-i18n="q.3.a">Each layer defines how an agent identifies itself, communicates and weighs decisions. Human and Dijkstra act as benchmarks; Ants, Physarum and River/Steiner each carry three sub-layers — fully LLM, hybrid, or rule-based — letting the system pick whichever sustains the greatest optimisation under set parameters.</p></div></div>
+      <div class="item"><button><span class="q-n">04</span><span class="q-t" data-i18n="q.4.q">How does the chagra connect to AI?</span><span class="pm">+</span></button><div class="ans"><p data-i18n="q.4.a">The chagra is a conceptual model: knowledge as layered, cultivated and relational rather than flatly retrieved. It reframes how a system should organise sources by use, trust and need — and grounds the whole project in a life-centred ethic rather than pure efficiency.</p></div></div>
+      <div class="item"><button><span class="q-n">05</span><span class="q-t" data-i18n="q.5.q">Is this about replacing humans?</span><span class="pm">+</span></button><div class="ans"><p data-i18n="q.5.a">No. The aim is disciplined coexistence — cooperation that does not become domination, assistance that does not become dependency, optimisation that does not eclipse meaning. AI as a better partner in complexity, not a substitute for human agency.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<section id="contact"></section>
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="reveal">
+        <p class="foot-big" data-i18n="ft.big">Not perfecting the machine against the world — but learning to <span>inhabit it more wisely, together.</span></p>
+      </div>
+      <div class="foot-col reveal">
+        <h6 data-i18n="ft.work">Work</h6>
+        <a href="#xylem" data-i18n="ft.w1">Xylem · MSc Thesis</a>
+        <a href="#code" data-i18n="ft.w2">The Symbiotic Code · CRC Press</a>
+        <a href="https://chagra-net.vercel.app/en" target="_blank" rel="noopener" data-i18n="ft.w3">CHAGRA-NET · Amazon Corridor ↗</a>
+        <a href="https://sketch-real-mvp.vercel.app/" target="_blank" rel="noopener" data-i18n="ft.w5">sketch-real · Cinematography Engine ↗</a>
+        <a href="https://letrina-store.vercel.app/" target="_blank" rel="noopener" data-i18n="ft.w4">Letrina · Software Drops ↗</a>
+      </div>
+      <div class="foot-col reveal">
+        <h6 data-i18n="ft.contact">Contact</h6>
+        <p data-i18n="ft.c1">Felipe López Mantilla</p>
+        <a href="https://portfolio-felipe-lopez.vercel.app/" target="_blank" rel="noopener" data-i18n="ft.c2">Portfolio ↗</a>
+        <p data-i18n="ft.c3">UAL · Creative Computing Institute</p>
+        <p data-i18n="ft.c4">Mentors · Tim Smith & Hernando Bernal</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Felipe López Mantilla</span>
+      <span data-i18n="ft.tag">Biomimicry × Agentic AI · London / Amazonía</span>
+      <span class="mono">MODEL · MEASURE · MENTOR</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- i18n ---------- */
+const I18N = {
+  es:{
+    "pre.line":"la naturaleza como modelo · medida · mentora",
+    "nav.code":"El Código","nav.xylem":"Xylem","nav.chagra":"La Chagra","nav.coevo":"Coevolución","nav.contact":"Contacto",
+    "hero.epi":"“La inteligencia nunca está separada de la forma — la curva de un ala, la ramificación de una raíz, la señal de una feromona: todas portan sentido.”",
+    "hero.sub":"Biomimética + IA Agéntica para la optimización de tareas en simulación 3D. Una práctica de investigación donde la naturaleza se lee como modelo, medida y mentora — y el código aprende a cooperar con la vida.",
+    "hero.by1":"MSc. Felipe López Mantilla","hero.by2":"<b>UAL CCI</b>",
+    "hero.cta1":"Entrar a la simulación","hero.cta2":"Leer el código","hero.cta3":"Xylem de la Sociedad ↗","hero.scroll":"baja",
+    "pro.eye":"Prólogo",
+    "pro.big":"En su esencia, la biomimética y la inteligencia artificial comparten una idea: el <span>mímico</span> — un sistema que adapta su contexto y sus necesidades en una forma capaz de aprender, comportarse y actuar dentro de un mundo vivo.",
+    "pro.sig":"— El Código Simbiótico · Capítulo III",
+    "code.eye":"El Código Simbiótico","code.title":"Humano · máquina · naturaleza, <em>coevolucionando</em>",
+    "code.lead":"Un paradigma filosófico-científico en el que los sistemas computacionales imitan e interpretan el razonamiento natural — no para reemplazar la agencia humana, sino para cooperar con ella y situarla dentro del equilibrio ecológico.",
+    "code.p1":"Aquí la biomimética no es un préstamo ornamental. Es una reorientación metodológica y ética: la naturaleza leída como modelo, medida y mentora. La mímesis no es mera copia, sino aprendizaje a través de la relación atenta — comprender la inteligencia inscrita en la forma, el comportamiento y la interdependencia, en lugar de reproducir la superficie de una hoja, una concha, una colonia.",
+    "code.p2":"Los objetivos medibles, la gobernanza y la seguridad no son controles externos añadidos después del diseño. Son parte de la lógica misma del diseño.",
+    "xy.eye":"La Simulación","xy.title":"Agentes que se mueven como se mueve la <em>naturaleza</em>",
+    "xy.q":"¿Cómo pueden integrarse los principios biomiméticos con la IA Agéntica en un entorno 3D dinámico para simular sistemas de tareas centrados en el ser humano?",
+    "xy.p1":"Dentro de un proxy determinista — un flujo sencillo de “hacer un sándwich”: recoger → organizar → ensamblar → entregar — los agentes se rigen por capas intercambiables de inteligencia. Un puente de decisión en Python llama a un modelo de lenguaje para las decisiones de staging, drop-off y sprint, mientras cada capa porta su propia lógica, desde reglas rígidas hasta la adaptación viva guiada por feromonas. El reto: reducir colisiones, re-cruces y staging inactivo, y alcanzar o superar los baselines — de forma reproducible.",
+    "xy.l1.t":"Humano","xy.l1.r":"referencia","xy.l1.d":"Cómo una persona entendería y completaría la tarea — la referencia contra la que se mide todo.",
+    "xy.l2.t":"Dijkstra","xy.l2.r":"camino más corto","xy.l2.d":"Camino más corto ponderado entre nodos — eficiente, pero ciego al comportamiento de staging y entrega.",
+    "xy.l3.t":"Hormigas","xy.l3.r":"inteligencia de colonia","xy.l3.d":"Biomimética social — rastros de feromonas y reciprocidad para la coordinación y menos colisiones.",
+    "xy.l4.t":"Physarum","xy.l4.r":"moho mucilaginoso","xy.l4.d":"Lógica de moho que “aprende” rutas eficientes en espacios multi-fuente y llenos de obstáculos.",
+    "xy.l5.t":"Río / Steiner","xy.l5.r":"redes de flujo","xy.l5.d":"Geometrías de flujo ramificado que minimizan el costo total de la red — como el agua y las raíces.",
+    "xy.iso":"Nivel 1 · Semilla 33333 · Orden 2413 · 1550 ejecuciones — una retícula de arenas idénticas, una política de decisión cada una",
+    "m.l1":"capas biomiméticas","m.l2":"ejecuciones de simulación","m.l3":"sub-capas por especie · LLM / híbrida / regla","m.l4":"semilla del nivel 1",
+    "ch.eye":"La Chagra · Un Modelo Vivo","ch.title":"Conocimiento que se <em>cultiva</em>, no se almacena",
+    "ch.lead":"La chagra amazónica no es solo un espacio agrícola. Es un sistema de coexistencia, secuencia, cuidado y regeneración — un modelo de cómo la inteligencia puede ser estratificada, relacional y traída a la vida a través del uso.",
+    "ch.p1":"Construida por los pueblos indígenas de la Amazonía colombiana, la chagra imita los propios ciclos de energía y materia del bosque. Lo que se siembra, se cosecha, se deja recuperar, se comparte y se vuelve a aprender se mueve como una cadena trófica — de la observación a la interpretación, la aplicación, la transmisión, y de vuelta a la revisión. Resiste el aplanamiento de la abundancia digital, donde toda la información parece igualmente disponible aunque no esté igualmente fundamentada.",
+    "ch.p2":"Es uno de los ejemplos vivos más claros de sinergia entre la humanidad y la naturaleza — y una advertencia: esta agrobiodiversidad se está perdiendo a medida que el cultivo cede paso al consumo.",
+    "ch.r1.t":"Sembrar","ch.r1.d":"señales para la acción inmediata","ch.r2.t":"Cosechar","ch.r2.d":"profundidad, jerarquía, validación","ch.r3.t":"Recuperar","ch.r3.d":"dejar que la tierra se regenere","ch.r4.t":"Transmitir","ch.r4.d":"conocimiento renacido por el uso",
+    "co.eye":"Tres Raíces","co.title":"Más allá del <em>antropocentrismo</em>",
+    "co.lead":"No una jerarquía donde uno domina y los demás obedecen — ni la fantasía de una fusión sin fricción. Una visión más exigente: sistemas centrados en lo humano que siguen siendo responsables ante principios centrados en la vida.",
+    "co.h.w":"Humano","co.h.t":"agencia","co.h.d":"El agente sigue presente, pero su percepción, su tiempo y sus elecciones son reestructurados por mediadores diseñados. Relacional, no meramente autónomo.",
+    "co.m.w":"Máquina","co.m.t":"inferencia","co.m.d":"Una tecnología relacional con influencia real — una compañera en la complejidad que interpreta necesidades y detecta patrones, sin pretender un yo que aún no posee.",
+    "co.n.w":"Naturaleza","co.n.t":"sabiduría","co.n.d":"Mutualismo, señalización, inteligencia distribuida y coordinación adaptativa — coexistencia que no necesita igualdad de identidad para ser significativa.",
+    "q.eye":"Preguntas Clave","q.title":"Todo lo que necesitas <em>saber</em>",
+    "q.1.q":"¿Qué es Xylem, en una frase?","q.1.a":"Un marco de investigación que operacionaliza la biomimética en términos computacionales — traduciendo principios como la reciprocidad, la inteligencia de colonia y el flujo adaptativo en mejoras medibles en cómo los agentes de IA completan tareas centradas en el ser humano.",
+    "q.2.q":"¿Por qué se llama Xylem?","q.2.a":"El xilema es el tejido vascular que transporta agua y nutrientes hacia arriba a través de una planta — una red silenciosa que conecta las raíces con las hojas. Es la metáfora de este trabajo: el canal por el que la sabiduría de la naturaleza, la inferencia de la máquina y la necesidad humana fluyen entre sí.",
+    "q.3.q":"¿Qué hacen realmente las capas?","q.3.a":"Cada capa define cómo un agente se identifica, comunica y pondera sus decisiones. Humano y Dijkstra actúan como referencias; Hormigas, Physarum y Río/Steiner portan cada una tres sub-capas — totalmente LLM, híbrida o basada en reglas — permitiendo que el sistema elija la que sostenga la mayor optimización bajo los parámetros establecidos.",
+    "q.4.q":"¿Cómo conecta la chagra con la IA?","q.4.a":"La chagra es un modelo conceptual: el conocimiento como algo estratificado, cultivado y relacional, en lugar de recuperado de forma plana. Reformula cómo un sistema debería organizar las fuentes por uso, confianza y necesidad — y ancla todo el proyecto en una ética centrada en la vida más que en la pura eficiencia.",
+    "q.5.q":"¿Se trata de reemplazar a los humanos?","q.5.a":"No. El objetivo es la coexistencia disciplinada — cooperación que no se vuelve dominación, asistencia que no se vuelve dependencia, optimización que no eclipsa el sentido. IA como mejor compañera en la complejidad, no como sustituto de la agencia humana.",
+    "ft.big":"No perfeccionar la máquina contra el mundo — sino aprender a <span>habitarlo más sabiamente, juntos.</span>",
+    "ft.work":"Trabajo","ft.w1":"Xylem · Tesis MSc","ft.w2":"El Código Simbiótico · CRC Press","ft.w3":"La Chagra · Modelo Vivo","ft.w4":"Letrina · Drops de Software ↗",
+    "ft.contact":"Contacto","ft.c1":"Felipe López Mantilla","ft.c2":"Portafolio ↗","ft.c3":"UAL · Creative Computing Institute","ft.c4":"Mentores · Tim Smith & Hernando Bernal",
+    "ft.tag":"Biomimética × IA Agéntica · Londres / Amazonía",
+    "nav.works":"Proyectos",
+    "wk.eye":"Proyectos · La Práctica Ampliada","wk.title":"Un mismo sistema de raíces, muchas <em>ramas</em>",
+    "wk.lead":"Xylem es un nodo dentro de un cuerpo de trabajo más amplio — investigación, escritura, plataformas regenerativas y herramientas de producción que comparten un mismo hilo: la naturaleza leída como modelo, medida y mentora.",
+    "wk.1.t":"Xylem","wk.1.c":"investigación · simulación","wk.1.d":"Biomimética + IA Agéntica para la optimización de tareas en simulación 3D. Estás aquí.",
+    "wk.2.t":"El Código Simbiótico","wk.2.c":"escritura · CRC Press","wk.2.d":"Principios para la coevolución humano–máquina–naturaleza — un capítulo de libro sobre IA simbiótica.",
+    "wk.3.t":"CHAGRA-NET","wk.3.c":"plataforma · regenerativa","wk.3.d":"Un corredor vivo solarpunk que conecta nómadas digitales y comunidades indígenas en Leticia, La Pedrera, Manaus y Belém — la biomimética como gobernanza, alineada con la COP30.",
+    "wk.4.t":"sketch-real","wk.4.c":"herramienta · cinematografía","wk.4.d":"Convierte bocetos en planos cinematográficos fotorrealistas a partir de un brief tipo guion, con nano-banana-pro en fal.ai.",
+    "wk.5.t":"Letrina","wk.5.c":"tienda · drops de software","wk.5.d":"Un pequeño archivo oscuro de drops de software de una sola vez. Sin cuentas — paga una vez, guarda el ID de compra.",
+    "wk.6.t":"Portafolio","wk.6.c":"índice · Felipe López Mantilla","wk.6.d":"El cuerpo completo de trabajo en tecnología creativa, UX e investigación — donde cada rama vuelve a conectarse con una sola práctica.",
+    "ft.w3":"CHAGRA-NET · Corredor Amazónico ↗","ft.w5":"sketch-real · Motor de Cinematografía ↗"
+  }
+};
+const EN = {}; // English read from DOM defaults
+function cacheEN(){document.querySelectorAll('[data-i18n]').forEach(el=>{EN[el.getAttribute('data-i18n')]=el.innerHTML;});}
+function setLang(l){
+  document.documentElement.lang=l;
+  const dict = l==='es'?I18N.es:EN;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n'); if(dict[k]!=null) el.innerHTML=dict[k];
+  });
+  enBtn.classList.toggle('on',l==='en'); esBtn.classList.toggle('on',l==='es');
+}
+
+/* ---------- ISO GRID (echoes the simulation lattice) ---------- */
+function buildIso(){
+  const g=document.getElementById('isoGrid'); if(!g) return;
+  const ox=400,oy=70,tw=58,th=29,rows=4,cols=4;
+  const tile=(cx,cy,fill,h=0)=>{
+    const top=`M${cx} ${cy-th-h} L${cx+tw} ${cy-h} L${cx} ${cy+th-h} L${cx-tw} ${cy-h} Z`;
+    const left=`M${cx-tw} ${cy-h} L${cx} ${cy+th-h} L${cx} ${cy+th} L${cx-tw} ${cy} Z`;
+    const right=`M${cx+tw} ${cy-h} L${cx} ${cy+th-h} L${cx} ${cy+th} L${cx+tw} ${cy} Z`;
+    let s='';
+    if(h>0){s+=`<path d="${left}" fill="#15267e"/><path d="${right}" fill="#0f1c5e"/>`;}
+    s+=`<path d="${top}" fill="${fill}" stroke="rgba(120,180,255,.25)" stroke-width="1"/>`;
+    return s;
+  };
+  let html='';
+  for(let r=0;r<rows;r++){for(let c=0;c<cols;c++){
+    const cx=ox+(c-r)*tw, cy=oy+(c+r)*th;
+    const special=(r===1&&c===2);
+    html+=tile(cx,cy,special?'url(#topW)':'url(#top)',special?6:2);
+    // green pad
+    html+=`<path d="M${cx-14} ${cy-(special?6:2)} L${cx+10} ${cy+10-(special?6:2)} L${cx-6} ${cy+18-(special?6:2)} L${cx-30} ${cy+2-(special?6:2)} Z" fill="url(#topG)" opacity=".9"/>`;
+    // agent dot
+    html+=`<circle cx="${cx+16}" cy="${cy-8-(special?6:2)}" r="3.4" fill="${special?'#48dbe6':'#e0567a'}"/>`;
+  }}
+  g.innerHTML=html;
+}
+
+/* ---------- INTERACTIONS ---------- */
+window.addEventListener('DOMContentLoaded',()=>{
+  cacheEN(); buildIso();
+
+  // preloader
+  const fill=document.getElementById('preFill'),pct=document.getElementById('prePct'),pre=document.getElementById('pre');
+  let p=0; const t=setInterval(()=>{
+    p+=Math.random()*9+3; if(p>=100){p=100;clearInterval(t);
+      setTimeout(()=>{pre.classList.add('done');document.body.classList.remove('locked');},400);}
+    fill.style.height=p+'%'; pct.textContent=String(Math.floor(p)).padStart(3,'0');
+  },90);
+
+  // nav solid on scroll
+  const hdr=document.getElementById('hdr');
+  const onScroll=()=>hdr.classList.toggle('solid',window.scrollY>40);
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  // burger
+  burger.addEventListener('click',()=>document.getElementById('navlinks').classList.toggle('show'));
+  document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('show')));
+
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*60)+'ms';io.observe(el);});
+
+  // faq
+  document.querySelectorAll('#faq .item').forEach(it=>{
+    const btn=it.querySelector('button'),ans=it.querySelector('.ans');
+    btn.addEventListener('click',()=>{
+      const open=it.classList.contains('open');
+      document.querySelectorAll('#faq .item').forEach(o=>{o.classList.remove('open');o.querySelector('.ans').style.maxHeight=null;});
+      if(!open){it.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
+    });
+  });
+});
+</script>
+</body>
+</html>

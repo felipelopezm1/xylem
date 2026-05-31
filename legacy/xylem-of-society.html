@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xylem of Society — Economic Growth & Trade on Nature Proxies & AI</title>
+<meta name="description" content="A research provocation: economic growth and trade built on nature proxies and artificial intelligence — where the Xylem project, the Amazonian chagra and Voltaire's defense of abundance meet new economic spaces for developing countries.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0a07;
+    --bone:#f3ecd8;
+    --bone-2:#e7ddc2;
+    --ink:#16130c;
+    --orange:#ff3d17;
+    --orange-2:#ff6a2b;
+    --lime:#c8ff2e;
+    --lime-deep:#9bd400;
+    --cyan:#48dbe6;
+    --muted-d:#8c8470;
+    --muted-l:#6b6450;
+    --disp:'Anton',Impact,sans-serif;
+    --serif:'Fraunces',Georgia,serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --maxw:1200px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--bone);font-family:var(--serif);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body.locked{overflow:hidden;height:100vh}
+  ::selection{background:var(--lime);color:#0c0a07}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:var(--mono)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+
+  /* grain overlay */
+  .grain{position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.06;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;font-weight:500}
+
+  /* thread chips */
+  .threads{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .chip{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border:1px solid currentColor;border-radius:2px;font-weight:500}
+  .chip.xy{color:var(--cyan)} .chip.ch{color:var(--lime-deep)} .chip.vo{color:var(--orange)} .chip.gs{color:var(--muted-d)}
+  .bone .chip.ch{color:#5e8a00} .bone .chip.gs{color:var(--muted-l)}
+
+  /* ---------- HEADER ---------- */
+  header{position:fixed;top:0;left:0;right:0;z-index:800;transition:background .4s,border-color .4s}
+  header.solid{background:rgba(12,10,7,.86);backdrop-filter:blur(12px);border-bottom:1px solid rgba(243,236,216,.14)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .back{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone);display:flex;align-items:center;gap:9px;transition:.25s}
+  .back:hover{color:var(--lime)}
+  .back .b{width:8px;height:8px;background:var(--lime);border-radius:50%;box-shadow:0 0 9px var(--lime)}
+  .lang{display:flex;font-family:var(--mono);font-size:12px;border:1px solid rgba(243,236,216,.22);border-radius:999px;overflow:hidden}
+  .lang button{background:none;border:0;color:var(--muted-d);padding:6px 12px;cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.1em;transition:.25s}
+  .lang button.on{background:var(--lime);color:#0c0a07;font-weight:700}
+
+  /* ---------- PRELOADER ---------- */
+  #pre{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s,visibility .8s}
+  #pre.done{opacity:0;visibility:hidden}
+  #pre .scream{font-family:var(--disp);font-size:clamp(40px,9vw,96px);line-height:.9;letter-spacing:.01em;color:var(--bone);text-align:center}
+  #pre .scream em{color:var(--orange);font-style:normal}
+  #pre .pct{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--lime);margin-top:22px}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:110px 0 70px;overflow:hidden}
+  .hero .disc{position:absolute;border-radius:50%;filter:blur(2px);opacity:.92;z-index:0}
+  .d-orange{width:46vw;height:46vw;max-width:560px;max-height:560px;background:var(--orange);top:6%;right:-6%;
+    -webkit-mask-image:radial-gradient(circle,#000 1.4px,transparent 1.6px);mask-image:radial-gradient(circle,#000 1.4px,transparent 1.6px);
+    -webkit-mask-size:7px 7px;mask-size:7px 7px;filter:none;opacity:.85}
+  .d-lime{width:24vw;height:24vw;max-width:300px;max-height:300px;background:var(--lime);bottom:8%;left:-5%;opacity:.5;filter:blur(50px)}
+  .hero .wrap{position:relative;z-index:2;width:100%}
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--lime);border:1px solid rgba(200,255,46,.4);padding:8px 14px;border-radius:2px;opacity:0;animation:rise .8s .1s forwards}
+  h1{font-family:var(--disp);font-size:clamp(58px,14vw,184px);line-height:.86;letter-spacing:.005em;text-transform:uppercase;margin:26px 0 0;opacity:0;animation:rise .9s .25s forwards}
+  h1 .of{color:var(--orange)}
+  .subhead{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(18px,2.6vw,32px);line-height:1.28;max-width:24ch;margin-top:24px;color:var(--bone);opacity:0;animation:rise .9s .4s forwards}
+  .subhead b{font-style:normal;font-weight:500;color:var(--lime)}
+  .volt{margin-top:34px;border-left:3px solid var(--orange);padding-left:20px;max-width:40ch;opacity:0;animation:rise .9s .55s forwards}
+  .volt .q{font-family:var(--disp);font-size:clamp(22px,3.4vw,40px);text-transform:uppercase;line-height:1;color:var(--bone)}
+  .volt .a{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-d);margin-top:10px}
+  .lead-intro{font-family:var(--mono);font-size:clamp(13px,1.5vw,15px);font-weight:300;line-height:1.75;color:var(--bone);max-width:54ch;margin-top:30px;opacity:.92;opacity:0;animation:rise .9s .65s forwards}
+  .cta-row{margin-top:38px;display:flex;flex-wrap:wrap;gap:14px;opacity:0;animation:rise .9s .8s forwards}
+  .btn{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:15px 26px;border-radius:2px;border:1px solid rgba(243,236,216,.3);color:var(--bone);transition:.3s;cursor:pointer;background:none}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.fill{background:var(--lime);color:#0c0a07;border-color:var(--lime);font-weight:700}
+  .btn.fill:hover{background:var(--orange);border-color:var(--orange);color:var(--bone)}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* ---------- TICKER ---------- */
+  .ticker{background:var(--orange);color:#0c0a07;border-top:2px solid #0c0a07;border-bottom:2px solid #0c0a07;overflow:hidden;white-space:nowrap;padding:14px 0}
+  .ticker .run{display:inline-block;animation:scroll 30s linear infinite;font-family:var(--disp);font-size:clamp(18px,2.6vw,30px);text-transform:uppercase;letter-spacing:.02em}
+  .ticker .run span{margin:0 26px}
+  .ticker .run .dot{color:var(--bone)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ---------- SECTIONS ---------- */
+  section.s{position:relative;padding:clamp(80px,12vw,150px) 0}
+  section.dark{background:var(--bg);color:var(--bone)}
+  section.bone{background:var(--bone);color:var(--ink)}
+  section.bone .eyebrow{color:var(--orange)}
+  section.dark .eyebrow{color:var(--lime)}
+  .s-head{display:flex;align-items:flex-start;gap:clamp(20px,4vw,54px);margin-bottom:36px}
+  .bignum{font-family:var(--disp);font-size:clamp(64px,11vw,150px);line-height:.8;flex:none}
+  section.dark .bignum{color:transparent;-webkit-text-stroke:2px var(--muted-d);text-stroke:2px var(--muted-d)}
+  section.bone .bignum{color:transparent;-webkit-text-stroke:2px rgba(22,19,12,.28)}
+  .s-head .meta{padding-top:6px}
+  .s-title{font-family:var(--disp);text-transform:uppercase;font-size:clamp(30px,5.6vw,68px);line-height:.95;letter-spacing:.01em;margin-top:14px}
+  .s-title .hl{color:var(--orange)}
+  section.bone .s-title .hl{color:var(--orange)}
+  .s-title .hl2{color:var(--lime-deep)}
+  section.dark .s-title .hl2{color:var(--lime)}
+  .lead{font-family:var(--serif);font-weight:300;font-size:clamp(20px,2.6vw,30px);line-height:1.34;max-width:32ch;letter-spacing:-.01em}
+  .grid2{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,70px);align-items:start;margin-top:10px}
+  .copy{font-family:var(--mono);font-weight:300;font-size:clamp(14px,1.5vw,16px);line-height:1.75}
+  section.dark .copy{color:#d8d0bd}
+  section.bone .copy{color:#3a352a}
+  .copy + .copy{margin-top:18px}
+  .copy b{font-weight:700}
+  section.dark .copy b{color:var(--lime)} section.bone .copy b{color:var(--orange)}
+
+  /* pull quote block */
+  .pull{border:2px solid var(--orange);padding:clamp(24px,4vw,40px);margin-top:40px;position:relative}
+  .pull .pq{font-family:var(--disp);text-transform:uppercase;font-size:clamp(22px,3.6vw,46px);line-height:.98;letter-spacing:.01em}
+  .pull .pa{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-top:16px}
+
+  /* proxy cards */
+  .pcards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:42px}
+  .pcard{border:1px solid;padding:26px 22px;border-radius:2px;transition:.35s}
+  section.dark .pcard{border-color:rgba(243,236,216,.18);background:rgba(243,236,216,.02)}
+  section.bone .pcard{border-color:rgba(22,19,12,.18);background:rgba(22,19,12,.02)}
+  .pcard:hover{transform:translateY(-4px)}
+  .pcard .pi{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
+  .pcard h4{font-family:var(--disp);text-transform:uppercase;font-size:24px;margin:12px 0 6px;letter-spacing:.01em}
+  .pcard .arrow{color:var(--orange);font-family:var(--mono)}
+  .pcard p{font-family:var(--mono);font-size:13px;font-weight:300;line-height:1.6;margin-top:10px}
+  section.dark .pcard p{color:#cfc7b4} section.bone .pcard p{color:#4a4537}
+
+  /* vascular diagram */
+  .vasc{margin-top:44px}
+  .vasc svg{width:100%;height:auto;max-width:760px;margin:0 auto;display:block}
+  .vasc-cap{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-d);text-align:center;margin-top:18px}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#0c0a07;border-top:2px solid var(--orange);padding:clamp(70px,10vw,120px) 0 46px}
+  .foot-big{font-family:var(--disp);text-transform:uppercase;font-size:clamp(34px,6vw,86px);line-height:.9;max-width:14ch}
+  .foot-big .hl{color:var(--lime)}
+  .foot-grid{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
+  .foot-links{margin-top:60px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .foot-links a,.foot-links p{display:block;font-family:var(--mono);font-size:13px;color:var(--bone);margin-bottom:11px;transition:.25s}
+  .foot-links a:hover{color:var(--lime)}
+  .foot-links h6{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-d);margin-bottom:16px}
+  .foot-bot{margin-top:60px;padding-top:24px;border-top:1px solid rgba(243,236,216,.16);display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-d)}
+
+  @media(max-width:900px){
+    .grid2{grid-template-columns:1fr;gap:26px}
+    .pcards{grid-template-columns:1fr}
+    .foot-links{grid-template-columns:1fr}
+    .s-head{flex-direction:column;gap:8px}
+  }
+</style>
+</head>
+<body class="locked">
+<div class="grain"></div>
+
+<!-- PRELOADER -->
+<div id="pre">
+  <div class="scream" data-i18n="pre.s">XYLEM<br><em>OF SOCIETY</em></div>
+  <div class="pct"><span id="prePct">000</span>% — <span data-i18n="pre.l">germinating an argument</span></div>
+</div>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="back" href="./index.html"><span class="b"></span><span data-i18n="nav.back">Back to Xylem</span></a>
+    <div class="lang">
+      <button id="enBtn" class="on" onclick="setLang('en')">EN</button>
+      <button id="esBtn" onclick="setLang('es')">ES</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <span class="disc d-orange"></span>
+  <span class="disc d-lime"></span>
+  <div class="wrap">
+    <span class="kicker" data-i18n="hero.kicker">A research provocation · Xylem Project</span>
+    <h1>Xylem <span class="of">of</span><br>Society</h1>
+    <p class="subhead" data-i18n="hero.sub">On economic growth & trade built on <b>nature proxies</b> & artificial intelligence.</p>
+    <div class="volt">
+      <div class="q" data-i18n="hero.vq">“Abundance, mother of all arts.”</div>
+      <div class="a" data-i18n="hero.va">— Voltaire · Le Mondain · 1736</div>
+    </div>
+    <p class="lead-intro" data-i18n="hero.intro">An exploration of how the Xylem project, the Amazonian chagra, and Voltaire's defense of abundance might seed new economic spaces for the developing world — growth measured not only by what it accumulates, but by what it regenerates.</p>
+    <div class="cta-row">
+      <a href="#s1" class="btn fill" data-i18n="hero.cta1">Begin the argument ↓</a>
+      <a href="./index.html" class="btn" data-i18n="hero.cta2">← Return to the simulation</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="run" id="ticker"></div>
+</div>
+
+<!-- 01 -->
+<section class="s dark" id="s1">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="bignum">01</div>
+      <div class="meta">
+        <span class="eyebrow" data-i18n="s1.eye">The Premise</span>
+        <div class="threads"><span class="chip xy" data-i18n="t.xy">Xylem</span></div>
+        <h2 class="s-title" data-i18n="s1.title">Optimise on what <span class="hl">already works</span></h2>
+      </div>
+    </div>
+    <div class="grid2 reveal">
+      <p class="lead" data-i18n="s1.lead">Nature has been running distributed optimisation for billions of years. Xylem lets agents reason like it does — this page asks what happens when a society does.</p>
+      <div>
+        <p class="copy" data-i18n="s1.p1">A <b>nature proxy</b> is not a metaphor borrowed for decoration. It is a working principle — pheromone trails, slime-mould networks, branching river flows — abstracted into rules that coordinate, adapt and allocate.</p>
+        <p class="copy" data-i18n="s1.p2">If these principles can route agents through a 3D task, the wager of this page is simple: they might also route value through an economy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="s bone" id="s2">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="bignum">02</div>
+      <div class="meta">
+        <span class="eyebrow" data-i18n="s2.eye">Voltaire & Abundance</span>
+        <div class="threads"><span class="chip vo" data-i18n="t.vo">Voltaire</span></div>
+        <h2 class="s-title" data-i18n="s2.title">The age of <span class="hl">commerce</span>, defended</h2>
+      </div>
+    </div>
+    <div class="grid2 reveal">
+      <p class="lead" data-i18n="s2.lead">In 1736, against moralists mourning a lost golden age, Voltaire thanked nature for placing him in an age of commerce.</p>
+      <div>
+        <p class="copy" data-i18n="s2.p1">His <i>Le Mondain</i> reframed trade — and even luxury — as engines of refinement: circulation that funds the arts, multiplies wants and joys, and binds distant peoples together. Growth, for Voltaire, was not sin but civilisation.</p>
+        <p class="copy" data-i18n="s2.p2">The provocation we keep is his <b>appetite for abundance</b>. The provocation we add: change <i>what</i> we grow, and <i>how</i> the harvest is shared.</p>
+      </div>
+    </div>
+    <div class="pull reveal">
+      <div class="pq" data-i18n="s2.pq">Keep the appetite for abundance. Change what we grow.</div>
+      <div class="pa" data-i18n="s2.pa">Xylem of Society · thesis</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="s dark" id="s3">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="bignum">03</div>
+      <div class="meta">
+        <span class="eyebrow" data-i18n="s3.eye">The Chagra</span>
+        <div class="threads"><span class="chip ch" data-i18n="t.ch">Chagra</span></div>
+        <h2 class="s-title" data-i18n="s3.title">An economy of <span class="hl2">cultivation</span></h2>
+      </div>
+    </div>
+    <div class="grid2 reveal">
+      <p class="lead" data-i18n="s3.lead">The Amazonian chagra is a working economy that has run for millennia — without extraction.</p>
+      <div>
+        <p class="copy" data-i18n="s3.p1">Diversity over monoculture. Cyclical productivity over depletion. Reciprocity over accumulation. It is an in-situ bank of thousands of species, a system where what is taken is returned.</p>
+        <p class="copy" data-i18n="s3.p2">Read as economics, the chagra measures success by <b>regeneration</b> — the exact opposite of an economy that consumes its own base.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="s bone" id="s4">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="bignum">04</div>
+      <div class="meta">
+        <span class="eyebrow" data-i18n="s4.eye">Model · Measure · Mentor</span>
+        <div class="threads"><span class="chip xy" data-i18n="t.xy">Xylem</span><span class="chip ch" data-i18n="t.ch">Chagra</span></div>
+        <h2 class="s-title" data-i18n="s4.title">Nature applied to <span class="hl">markets</span></h2>
+      </div>
+    </div>
+    <div class="grid2 reveal">
+      <p class="lead" data-i18n="s4.lead">The Symbiotic Code reads nature as model, measure and mentor. Markets can be read the same way.</p>
+      <div>
+        <p class="copy" data-i18n="s4.p1"><b>Model</b> — copy the structure of living networks. <b>Measure</b> — benchmark against the resilience of ecosystems, not GDP alone.</p>
+        <p class="copy" data-i18n="s4.p2"><b>Mentor</b> — let nature set the ethical floor: assistance, not dependency; cooperation, not domination; optimisation that does not eclipse meaning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="s dark" id="s5">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="bignum">05</div>
+      <div class="meta">
+        <span class="eyebrow" data-i18n="s5.eye">Proxies as Economics</span>
+        <div class="threads"><span class="chip xy" data-i18n="t.xy">Xylem</span></div>
+        <h2 class="s-title" data-i18n="s5.title">Nature proxies as <span class="hl2">economic algorithms</span></h2>
+      </div>
+    </div>
+    <p class="lead reveal" data-i18n="s5.lead">The same layers that move Xylem's agents map cleanly onto economic coordination.</p>
+    <div class="pcards reveal">
+      <div class="pcard"><div class="pi">011 · <span class="arrow">→</span> <span data-i18n="s5.c1.r">price signals</span></div><h4 data-i18n="s5.c1.t">Ants</h4><p data-i18n="s5.c1.d">Pheromone trails are decentralised information — markets discovering routes and prices without a central planner.</p></div>
+      <div class="pcard"><div class="pi">100 · <span class="arrow">→</span> <span data-i18n="s5.c2.r">infrastructure</span></div><h4 data-i18n="s5.c2.t">Physarum</h4><p data-i18n="s5.c2.d">Slime mould reproduces near-optimal rail and grid layouts — resilient supply networks grown, not engineered.</p></div>
+      <div class="pcard"><div class="pi">101 · <span class="arrow">→</span> <span data-i18n="s5.c3.r">distribution</span></div><h4 data-i18n="s5.c3.t">River / Steiner</h4><p data-i18n="s5.c3.d">Branching flow geometries connect many to many at least total cost — how to move goods, water and value efficiently.</p></div>
+      <div class="pcard"><div class="pi">010 · <span class="arrow">→</span> <span data-i18n="s5.c4.r">benchmark</span></div><h4 data-i18n="s5.c4.t">Dijkstra</h4><p data-i18n="s5.c4.d">Pure efficiency between nodes — fast, but blind to staging, care and externalities. The cold baseline we measure against.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="s bone" id="s6">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="bignum">06</div>
+      <div class="meta">
+        <span class="eyebrow" data-i18n="s6.eye">Agentic AI</span>
+        <div class="threads"><span class="chip xy" data-i18n="t.xy">Xylem</span></div>
+        <h2 class="s-title" data-i18n="s6.title">Rehearse the economy <span class="hl">before living it</span></h2>
+      </div>
+    </div>
+    <div class="grid2 reveal">
+      <p class="lead" data-i18n="s6.lead">Before a policy touches a person, it can be run thousands of times in simulation.</p>
+      <div>
+        <p class="copy" data-i18n="s6.p1">Xylem's deterministic proxy and decision bridge become a sandbox for economic policy: seed it, run it <b>1,550 times</b>, watch where collisions, idle capacity and re-crossings appear.</p>
+        <p class="copy" data-i18n="s6.p2">Then choose the layer that sustains the most resilience. AI as a rehearsal space — not an oracle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="s dark" id="s7">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="bignum">07</div>
+      <div class="meta">
+        <span class="eyebrow" data-i18n="s7.eye">The Global South</span>
+        <div class="threads"><span class="chip gs" data-i18n="t.gs">Global South</span><span class="chip ch" data-i18n="t.ch">Chagra</span></div>
+        <h2 class="s-title" data-i18n="s7.title">New spaces <span class="hl2">to grow into</span></h2>
+      </div>
+    </div>
+    <div class="grid2 reveal">
+      <p class="lead" data-i18n="s7.lead">Developing economies need not repeat the extractive industrial path to reach abundance.</p>
+      <div>
+        <p class="copy" data-i18n="s7.p1">With local-first connectivity and nature-proxy coordination, regions like the Amazon can leapfrog. <b>CHAGRA-NET</b> sketches the corridor — Leticia to Belém — where biomimicry becomes governance and value-allocation.</p>
+        <p class="copy" data-i18n="s7.p2">It aligns with COP30's bioeconomy agenda and a single principle: forest protection and direct community benefit must move together, or not at all.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="s bone" id="s8">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="bignum">08</div>
+      <div class="meta">
+        <span class="eyebrow" data-i18n="s8.eye">The Necessary Caution</span>
+        <div class="threads"><span class="chip vo" data-i18n="t.vo">Voltaire</span><span class="chip gs" data-i18n="t.gs">Global South</span></div>
+        <h2 class="s-title" data-i18n="s8.title">The offensive of <span class="hl">capital against life</span></h2>
+      </div>
+    </div>
+    <div class="grid2 reveal">
+      <p class="lead" data-i18n="s8.lead">Critical economists name our moment bluntly — and the warning belongs here.</p>
+      <div>
+        <p class="copy" data-i18n="s8.p1">Financialisation, technological control and the management of crisis through coercion are real. Nature proxies can be captured too — optimised toward extraction as easily as regeneration.</p>
+        <p class="copy" data-i18n="s8.p2">A proxy is only credible when communities are <b>co-designers and rights-holders</b>, never just inspiration. Abundance bought against the living base is not abundance — it is a loan against the future.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section class="s dark" id="s9">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="bignum">09</div>
+      <div class="meta">
+        <span class="eyebrow" data-i18n="s9.eye">The Synthesis</span>
+        <div class="threads"><span class="chip xy" data-i18n="t.xy">Xylem</span><span class="chip ch" data-i18n="t.ch">Chagra</span><span class="chip vo" data-i18n="t.vo">Voltaire</span></div>
+        <h2 class="s-title" data-i18n="s9.title">Value that flows <span class="hl2">like sap</span></h2>
+      </div>
+    </div>
+    <p class="lead reveal" data-i18n="s9.lead">Picture the economy as a plant's vascular system — the Xylem of Society.</p>
+    <div class="vasc reveal">
+      <svg viewBox="0 0 760 360" aria-hidden="true">
+        <defs>
+          <linearGradient id="sap" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#9bd400"/><stop offset="1" stop-color="#48dbe6"/></linearGradient>
+        </defs>
+        <!-- canopy -->
+        <text x="380" y="40" text-anchor="middle" font-family="Anton,sans-serif" font-size="26" fill="#ff3d17" letter-spacing="1">CANOPY · SHARED ABUNDANCE</text>
+        <g id="canopy"></g>
+        <!-- trunk / xylem -->
+        <rect x="368" y="120" width="24" height="150" fill="url(#sap)" opacity=".9"/>
+        <text x="408" y="200" font-family="JetBrains Mono,monospace" font-size="13" fill="#48dbe6" letter-spacing="2">XYLEM · AI + TRADE</text>
+        <text x="408" y="220" font-family="JetBrains Mono,monospace" font-size="11" fill="#8c8470" letter-spacing="1">coordinating tissue</text>
+        <!-- roots -->
+        <g stroke="#9bd400" stroke-width="2" fill="none" opacity=".85">
+          <path d="M380 270 C300 300 230 300 150 340"/>
+          <path d="M380 270 C320 305 290 320 250 350"/>
+          <path d="M380 270 C460 300 530 300 610 340"/>
+          <path d="M380 270 C440 305 470 320 510 350"/>
+          <path d="M380 270 L380 350"/>
+        </g>
+        <text x="380" y="332" text-anchor="middle" font-family="Anton,sans-serif" font-size="20" fill="#c8ff2e" letter-spacing="1">ROOTS · COMMUNITIES + BIODIVERSITY</text>
+        <!-- sap loop arrows -->
+        <path d="M150 340 C90 280 90 120 360 70" stroke="#ff3d17" stroke-width="1.5" fill="none" stroke-dasharray="5 7" opacity=".7"/>
+        <path d="M610 340 C670 280 670 120 400 70" stroke="#ff3d17" stroke-width="1.5" fill="none" stroke-dasharray="5 7" opacity=".7"/>
+      </svg>
+      <p class="vasc-cap" data-i18n="s9.cap">Roots feed the xylem · the xylem lifts value to the canopy · the canopy drops it back to the roots</p>
+    </div>
+    <div class="grid2 reveal" style="margin-top:30px">
+      <p class="copy" data-i18n="s9.p1"><b>Roots</b> are communities and biodiversity. <b>Xylem</b> is the coordinating tissue — AI and trade carrying value upward. The <b>canopy</b> is shared abundance that, like a forest, drops its leaves back down to feed the roots.</p>
+      <p class="copy" data-i18n="s9.p2">Voltaire's growth, the chagra's regeneration and Xylem's coordination meet in one circulatory model: cultivated, layered, relational.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="s bone" id="s10">
+  <div class="wrap">
+    <div class="s-head reveal">
+      <div class="bignum">10</div>
+      <div class="meta">
+        <span class="eyebrow" data-i18n="s10.eye">An Open Field</span>
+        <div class="threads"><span class="chip xy" data-i18n="t.xy">Xylem</span><span class="chip ch" data-i18n="t.ch">Chagra</span><span class="chip vo" data-i18n="t.vo">Voltaire</span><span class="chip gs" data-i18n="t.gs">Global South</span></div>
+        <h2 class="s-title" data-i18n="s10.title">A provocation, <span class="hl">not a prescription</span></h2>
+      </div>
+    </div>
+    <div class="grid2 reveal">
+      <p class="lead" data-i18n="s10.lead">This is a beginning, not a blueprint.</p>
+      <div>
+        <p class="copy" data-i18n="s10.p1">Who owns the proxy? How do we measure resilience as honestly as we measure growth? Where does relational appearance end and real accountability begin?</p>
+        <p class="copy" data-i18n="s10.p2">Xylem of Society is an invitation to think these questions with communities, economists and machines together — to imagine, between uncertainties, <b>new horizons of common life</b>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <p class="foot-big reveal" data-i18n="ft.big">Grow what <span class="hl">regenerates.</span></p>
+    <div class="foot-grid reveal">
+      <a href="./index.html" class="btn fill" data-i18n="ft.cta1">← Back to Xylem</a>
+      <a href="https://chagra-net.vercel.app/en" target="_blank" rel="noopener" class="btn" data-i18n="ft.cta2">Visit CHAGRA-NET ↗</a>
+    </div>
+    <div class="foot-links reveal">
+      <div>
+        <h6 data-i18n="ft.sources">Sources & Threads</h6>
+        <a href="https://oll.libertyfund.org/quotes/voltaire-on-the-benefits-which-trade-and-economic-abundance-bring-to-people-living-in-the-present-age-1736" target="_blank" rel="noopener" data-i18n="ft.l1">Voltaire · Le Mondain (1736) ↗</a>
+        <a href="https://www.gutenberg.org/files/18569/18569-h/18569-h.htm" target="_blank" rel="noopener" data-i18n="ft.l2">Voltaire · Philosophical Dictionary ↗</a>
+        <a href="https://jec2026.com/" target="_blank" rel="noopener" data-i18n="ft.l3">XX Jornadas de Economía Crítica · Bilbao 2026 ↗</a>
+      </div>
+      <div>
+        <h6 data-i18n="ft.work">Related Work</h6>
+        <a href="./index.html" data-i18n="ft.w1">Xylem · Biomimicry + Agentic AI</a>
+        <a href="https://chagra-net.vercel.app/en" target="_blank" rel="noopener" data-i18n="ft.w2">CHAGRA-NET · Amazon Corridor ↗</a>
+        <a href="https://portfolio-felipe-lopez.vercel.app/" target="_blank" rel="noopener" data-i18n="ft.w3">Felipe López Mantilla · Portfolio ↗</a>
+      </div>
+      <div>
+        <h6 data-i18n="ft.note">A Note</h6>
+        <p data-i18n="ft.n1">An open research provocation by Felipe López Mantilla.</p>
+        <p data-i18n="ft.n2">UAL · Creative Computing Institute.</p>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Felipe López Mantilla</span>
+      <span data-i18n="ft.tag">Nature Proxies × AI × New Economics</span>
+      <span class="mono">MODEL · MEASURE · MENTOR</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const I18N = {
+  es:{
+    "pre.s":"XYLEM<br><em>DE LA SOCIEDAD</em>","pre.l":"germinando un argumento",
+    "nav.back":"Volver a Xylem",
+    "hero.kicker":"Una provocación de investigación · Proyecto Xylem",
+    "hero.sub":"Sobre el crecimiento económico y el comercio construidos sobre <b>proxies de la naturaleza</b> e inteligencia artificial.",
+    "hero.vq":"“La abundancia, madre de todas las artes.”","hero.va":"— Voltaire · Le Mondain · 1736",
+    "hero.intro":"Una exploración de cómo el proyecto Xylem, la chagra amazónica y la defensa de la abundancia de Voltaire podrían sembrar nuevos espacios económicos para el mundo en desarrollo — un crecimiento medido no solo por lo que acumula, sino por lo que regenera.",
+    "hero.cta1":"Comenzar el argumento ↓","hero.cta2":"← Volver a la simulación",
+    "s1.eye":"La Premisa","s1.title":"Optimizar sobre lo que <span class=\"hl\">ya funciona</span>",
+    "s1.lead":"La naturaleza lleva miles de millones de años ejecutando optimización distribuida. Xylem deja que los agentes razonen como ella — esta página pregunta qué pasa cuando lo hace una sociedad.",
+    "s1.p1":"Un <b>proxy de la naturaleza</b> no es una metáfora tomada como adorno. Es un principio operativo — rastros de feromonas, redes de moho mucilaginoso, flujos ramificados de ríos — abstraído en reglas que coordinan, adaptan y asignan.",
+    "s1.p2":"Si estos principios pueden enrutar agentes en una tarea 3D, la apuesta de esta página es sencilla: también podrían enrutar valor a través de una economía.",
+    "s2.eye":"Voltaire & la Abundancia","s2.title":"La era del <span class=\"hl\">comercio</span>, defendida",
+    "s2.lead":"En 1736, frente a los moralistas que lloraban una edad de oro perdida, Voltaire agradeció a la naturaleza haberlo colocado en una era de comercio.",
+    "s2.p1":"Su <i>Le Mondain</i> reformuló el comercio — e incluso el lujo — como motores de refinamiento: circulación que financia las artes, multiplica los deseos y los goces, y une a pueblos distantes. El crecimiento, para Voltaire, no era pecado sino civilización.",
+    "s2.p2":"La provocación que conservamos es su <b>apetito por la abundancia</b>. La que añadimos: cambiar <i>qué</i> cultivamos y <i>cómo</i> se reparte la cosecha.",
+    "s2.pq":"Conserva el apetito por la abundancia. Cambia lo que cultivamos.","s2.pa":"Xylem de la Sociedad · tesis",
+    "s3.eye":"La Chagra","s3.title":"Una economía de <span class=\"hl2\">cultivo</span>",
+    "s3.lead":"La chagra amazónica es una economía viva que ha funcionado por milenios — sin extracción.",
+    "s3.p1":"Diversidad sobre monocultivo. Productividad cíclica sobre agotamiento. Reciprocidad sobre acumulación. Es un banco in situ de miles de especies, un sistema donde lo que se toma se devuelve.",
+    "s3.p2":"Leída como economía, la chagra mide el éxito por la <b>regeneración</b> — lo opuesto exacto a una economía que consume su propia base.",
+    "s4.eye":"Modelo · Medida · Mentora","s4.title":"La naturaleza aplicada a los <span class=\"hl\">mercados</span>",
+    "s4.lead":"El Código Simbiótico lee la naturaleza como modelo, medida y mentora. Los mercados pueden leerse igual.",
+    "s4.p1":"<b>Modelo</b> — copiar la estructura de las redes vivas. <b>Medida</b> — compararse con la resiliencia de los ecosistemas, no solo con el PIB.",
+    "s4.p2":"<b>Mentora</b> — dejar que la naturaleza fije el piso ético: asistencia, no dependencia; cooperación, no dominación; optimización que no eclipse el sentido.",
+    "s5.eye":"Proxies como Economía","s5.title":"Proxies de la naturaleza como <span class=\"hl2\">algoritmos económicos</span>",
+    "s5.lead":"Las mismas capas que mueven a los agentes de Xylem se trasladan limpiamente a la coordinación económica.",
+    "s5.c1.r":"señales de precio","s5.c1.t":"Hormigas","s5.c1.d":"Los rastros de feromonas son información descentralizada — mercados que descubren rutas y precios sin un planificador central.",
+    "s5.c2.r":"infraestructura","s5.c2.t":"Physarum","s5.c2.d":"El moho mucilaginoso reproduce trazados casi óptimos de vías y redes — cadenas de suministro resilientes que se cultivan, no se diseñan.",
+    "s5.c3.r":"distribución","s5.c3.t":"Río / Steiner","s5.c3.d":"Geometrías de flujo ramificado conectan a muchos con muchos al menor costo total — cómo mover bienes, agua y valor de forma eficiente.",
+    "s5.c4.r":"referencia","s5.c4.t":"Dijkstra","s5.c4.d":"Eficiencia pura entre nodos — rápida, pero ciega al staging, al cuidado y a las externalidades. La línea base fría contra la que medimos.",
+    "s6.eye":"IA Agéntica","s6.title":"Ensayar la economía <span class=\"hl\">antes de vivirla</span>",
+    "s6.lead":"Antes de que una política toque a una persona, puede ejecutarse miles de veces en simulación.",
+    "s6.p1":"El proxy determinista y el puente de decisión de Xylem se vuelven un laboratorio para la política económica: siémbralo, ejecútalo <b>1.550 veces</b>, observa dónde aparecen colisiones, capacidad ociosa y re-cruces.",
+    "s6.p2":"Luego elige la capa que sostenga la mayor resiliencia. La IA como espacio de ensayo — no como oráculo.",
+    "s7.eye":"El Sur Global","s7.title":"Nuevos espacios <span class=\"hl2\">para crecer</span>",
+    "s7.lead":"Las economías en desarrollo no tienen por qué repetir la vía industrial extractiva para alcanzar la abundancia.",
+    "s7.p1":"Con conectividad local-first y coordinación por proxies de la naturaleza, regiones como la Amazonía pueden dar el salto. <b>CHAGRA-NET</b> esboza el corredor — de Leticia a Belém — donde la biomimética se vuelve gobernanza y asignación de valor.",
+    "s7.p2":"Se alinea con la agenda de bioeconomía de la COP30 y un solo principio: la protección del bosque y el beneficio directo de la comunidad deben moverse juntos, o no moverse.",
+    "s8.eye":"La Cautela Necesaria","s8.title":"La ofensiva del <span class=\"hl\">capital contra la vida</span>",
+    "s8.lead":"La economía crítica nombra nuestro momento sin rodeos — y la advertencia pertenece aquí.",
+    "s8.p1":"La financiarización, el control tecnológico y la gestión de la crisis mediante la coerción son reales. Los proxies de la naturaleza también pueden capturarse — optimizarse hacia la extracción tan fácilmente como hacia la regeneración.",
+    "s8.p2":"Un proxy solo es creíble cuando las comunidades son <b>co-diseñadoras y titulares de derechos</b>, nunca mera inspiración. La abundancia comprada contra la base viva no es abundancia — es un préstamo contra el futuro.",
+    "s9.eye":"La Síntesis","s9.title":"Valor que fluye <span class=\"hl2\">como savia</span>",
+    "s9.lead":"Imagina la economía como el sistema vascular de una planta — el Xylem de la Sociedad.",
+    "s9.cap":"Las raíces alimentan el xilema · el xilema eleva el valor hacia la copa · la copa lo devuelve a las raíces",
+    "s9.p1":"Las <b>raíces</b> son las comunidades y la biodiversidad. El <b>xilema</b> es el tejido coordinador — IA y comercio llevando el valor hacia arriba. La <b>copa</b> es la abundancia compartida que, como un bosque, deja caer sus hojas para alimentar las raíces.",
+    "s9.p2":"El crecimiento de Voltaire, la regeneración de la chagra y la coordinación de Xylem se encuentran en un solo modelo circulatorio: cultivado, estratificado, relacional.",
+    "s10.eye":"Un Campo Abierto","s10.title":"Una provocación, <span class=\"hl\">no una receta</span>",
+    "s10.lead":"Esto es un comienzo, no un plano.",
+    "s10.p1":"¿Quién es dueño del proxy? ¿Cómo medimos la resiliencia con la misma honestidad con que medimos el crecimiento? ¿Dónde termina la apariencia relacional y empieza la responsabilidad real?",
+    "s10.p2":"Xylem de la Sociedad es una invitación a pensar estas preguntas junto a comunidades, economistas y máquinas — a imaginar, entre incertidumbres, <b>nuevos horizontes de vida común</b>.",
+    "t.xy":"Xylem","t.ch":"Chagra","t.vo":"Voltaire","t.gs":"Sur Global",
+    "ft.big":"Cultiva lo que <span class=\"hl\">regenera.</span>",
+    "ft.cta1":"← Volver a Xylem","ft.cta2":"Visitar CHAGRA-NET ↗",
+    "ft.sources":"Fuentes & Hilos","ft.l1":"Voltaire · Le Mondain (1736) ↗","ft.l2":"Voltaire · Diccionario Filosófico ↗","ft.l3":"XX Jornadas de Economía Crítica · Bilbao 2026 ↗",
+    "ft.work":"Trabajo Relacionado","ft.w1":"Xylem · Biomimética + IA Agéntica","ft.w2":"CHAGRA-NET · Corredor Amazónico ↗","ft.w3":"Felipe López Mantilla · Portafolio ↗",
+    "ft.note":"Una Nota","ft.n1":"Una provocación de investigación abierta de Felipe López Mantilla.","ft.n2":"UAL · Creative Computing Institute.",
+    "ft.tag":"Proxies de la Naturaleza × IA × Nueva Economía"
+  }
+};
+const EN={};
+function cacheEN(){document.querySelectorAll('[data-i18n]').forEach(el=>{EN[el.getAttribute('data-i18n')]=el.innerHTML;});}
+function setLang(l){
+  document.documentElement.lang=l;
+  const dict=l==='es'?I18N.es:EN;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(dict[k]!=null)el.innerHTML=dict[k];});
+  enBtn.classList.toggle('on',l==='en');esBtn.classList.toggle('on',l==='es');
+  buildTicker();
+}
+function buildTicker(){
+  const es=document.documentElement.lang==='es';
+  const words=es?['Abundancia','Regeneración','Modelo','Medida','Mentora','Reciprocidad','Proxies de la Naturaleza','Sur Global','Chagra','Comercio']
+                :['Abundance','Regeneration','Model','Measure','Mentor','Reciprocity','Nature Proxies','Global South','Chagra','Trade'];
+  const seg=words.map(w=>`<span>${w}</span><span class="dot">/</span>`).join('');
+  document.getElementById('ticker').innerHTML=seg+seg;
+}
+function buildCanopy(){
+  const g=document.getElementById('canopy');if(!g)return;let s='';
+  for(let i=0;i<14;i++){const x=200+i*26+(i%2?6:0);const y=70+(i%3)*10;const r=6+(i%3)*3;
+    s+=`<circle cx="${x}" cy="${y}" r="${r}" fill="${i%2?'#9bd400':'#48dbe6'}" opacity="${.45+(i%3)*.18}"/>`;}
+  g.innerHTML=s;
+}
+window.addEventListener('DOMContentLoaded',()=>{
+  cacheEN();buildTicker();buildCanopy();
+  const pct=document.getElementById('prePct'),pre=document.getElementById('pre');
+  let p=0;const t=setInterval(()=>{p+=Math.random()*10+4;if(p>=100){p=100;clearInterval(t);
+    setTimeout(()=>{pre.classList.add('done');document.body.classList.remove('locked');},380);}
+    pct.textContent=String(Math.floor(p)).padStart(3,'0');},85);
+  const hdr=document.getElementById('hdr');
+  const onScroll=()=>hdr.classList.toggle('solid',window.scrollY>40);
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+});
+</script>
+</body>
+</html>

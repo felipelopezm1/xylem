@@ -1,0 +1,33 @@
+:root {
+  --bg: #060b1a;
+  --bg-2: #0a1228;
+  --ink: #eef2f7;
+  --muted: #7c89a8;
+  --muted-2: #4a567a;
+  --blue: #2348d4;
+  --blue-deep: #15267e;
+  --cyan: #48dbe6;
+  --cyan-soft: #7ce9e6;
+  --green: #83e08a;
+  --clay: #e0bb8c;
+  --clay-deep: #b5824f;
+  --line: rgba(124, 137, 168, 0.18);
+  --line-soft: rgba(124, 137, 168, 0.1);
+  --serif: 'Fraunces', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --maxw: 1280px;
+
+  /* Society page tokens */
+  --society-bg: #0c0a07;
+  --bone: #f3ecd8;
+  --bone-2: #e7ddc2;
+  --society-ink: #16130c;
+  --orange: #ff3d17;
+  --orange-2: #ff6a2b;
+  --lime: #c8ff2e;
+  --lime-deep: #9bd400;
+  --muted-d: #8c8470;
+  --muted-l: #6b6450;
+  --disp: 'Anton', Impact, sans-serif;
+  --society-maxw: 1200px;
+}
