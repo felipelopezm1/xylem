@@ -232,6 +232,11 @@ h1.title {
   animation: rise 1s 0.35s forwards;
 }
 
+h1.title.pretext-hover {
+  width: max-content;
+  max-width: 100%;
+}
+
 h1.title .x {
   font-style: italic;
   font-weight: 300;

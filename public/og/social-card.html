@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1200, height=627" />
+<title>XYLEM OG Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1200px;
+    height: 627px;
+    overflow: hidden;
+    background: #060b1a;
+    color: #eef2f7;
+    font-family: 'Fraunces', Georgia, serif;
+  }
+  .card {
+    position: relative;
+    width: 1200px;
+    height: 627px;
+    padding: 72px 80px;
+    background:
+      radial-gradient(120% 90% at 82% -10%, rgba(35, 72, 212, 0.32), transparent 55%),
+      radial-gradient(80% 70% at -5% 110%, rgba(72, 219, 230, 0.12), transparent 60%),
+      #060b1a;
+  }
+  .veins {
+    position: absolute;
+    inset: 0;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  .brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #7c89a8;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+  .brand .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #48dbe6;
+    box-shadow: 0 0 12px #48dbe6;
+  }
+  h1 {
+    font-size: 132px;
+    font-weight: 600;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+  }
+  h1 .y {
+    font-style: italic;
+    font-weight: 300;
+    color: #48dbe6;
+  }
+  .lead {
+    margin-top: 28px;
+    max-width: 720px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    line-height: 1.45;
+    letter-spacing: 0.04em;
+    color: #cdd5e4;
+  }
+  .lead b {
+    color: #48dbe6;
+    font-weight: 500;
+  }
+  .tag {
+    position: absolute;
+    left: 80px;
+    bottom: 64px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #83e08a;
+  }
+  .panel {
+    position: absolute;
+    right: 64px;
+    bottom: 56px;
+    width: 360px;
+    border: 1px solid rgba(124, 137, 168, 0.22);
+    background: rgba(4, 10, 26, 0.72);
+    padding: 18px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1.55;
+    color: #7c89a8;
+  }
+  .panel .hl { color: #48dbe6; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <svg class="veins" viewBox="0 0 1200 627" aria-hidden="true">
+      <g stroke="rgba(124,137,168,.16)" stroke-width="1" fill="none">
+        <path d="M80 627 C80 420 40 340 80 220 C110 150 80 90 140 20" />
+        <path d="M360 627 C360 450 400 360 360 250 C330 170 380 110 340 0" />
+        <path d="M600 650 C600 450 600 330 600 210 C600 120 600 50 600 -30" />
+        <path d="M840 627 C840 440 800 350 840 250 C870 170 820 110 880 0" />
+        <path d="M1120 627 C1120 420 1160 340 1120 220 C1090 150 1140 90 1080 20" />
+      </g>
+    </svg>
+    <div class="brand"><span class="dot"></span> XYLEM / symbiotic code</div>
+    <h1>X<span class="y">y</span>lem</h1>
+    <p class="lead">Biomimicry + Agentic AI for task optimisation in 3D simulation. Nature read as <b>model, measure &amp; mentor</b>.</p>
+    <div class="tag">MODEL · MEASURE · MENTOR</div>
+    <pre class="panel">XYLEM // SYMBIOTIC CODE v.2026
+────────────────────────
+001  HUMAN      benchmark
+010  DIJKSTRA   shortest path
+011  ANTS       colony intelligence
+100  PHYSARUM   slime pathfinding
+101  RIVER      flow networks</pre>
+  </div>
+</body>
+</html>
