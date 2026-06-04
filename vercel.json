@@ -1,5 +1,16 @@
 {
   "rewrites": [
+    {
+      "source": "/xylem-of-society",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i).*(facebookexternalhit|Facebot|Twitterbot|Slackbot|Discordbot|LinkedInBot|WhatsApp|TelegramBot|Applebot|Pinterest|Googlebot|bingbot|Embedly|preview).*"
+        }
+      ],
+      "destination": "/og/society-preview.html"
+    },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
