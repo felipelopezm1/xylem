@@ -28,6 +28,9 @@ export default function HomeFooter() {
               <a href="https://letrina-store.vercel.app/" target="_blank" rel="noopener noreferrer">
                 <Trans k="ft.w4" interactive={false} />
               </a>
+              <a href="/legacy/tide-xylem-deck.html">
+                <Trans k="ft.w6" interactive={false} />
+              </a>
             </div>
             <div className="foot-col reveal">
               <Trans k="ft.contact" as="h6" interactive={false} />

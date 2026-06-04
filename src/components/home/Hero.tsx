@@ -47,6 +47,9 @@ export function Hero() {
             <div className="by">
               <Trans k="hero.by1" interactive={false} inline />
               <Trans k="hero.by2" interactive={false} inline />
+              <a href="/legacy/tide-xylem-deck.html" className="by-tide">
+                <Trans k="hero.by3" interactive={false} />
+              </a>
             </div>
             <div className="cta-row">
               <a href="#xylem" className="btn fill">
@@ -57,6 +60,9 @@ export function Hero() {
               </a>
               <a href="/xylem-of-society" className="btn society">
                 <Trans k="hero.cta3" interactive={false} />
+              </a>
+              <a href="/legacy/tide-xylem-deck.html" className="btn tide">
+                <Trans k="hero.cta4" interactive={false} />
               </a>
             </div>
           </div>

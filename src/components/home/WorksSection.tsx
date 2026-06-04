@@ -40,6 +40,15 @@ const WORKS = [
     external: true,
     arrow: '↗',
   },
+  {
+    ix: '07',
+    title: 'wk.7.t',
+    cat: 'wk.7.c',
+    desc: 'wk.7.d',
+    href: '/legacy/tide-xylem-deck.html',
+    external: false,
+    arrow: '↗',
+  },
 ] as const
 
 export default function WorksSection() {
