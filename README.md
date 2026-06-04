@@ -38,4 +38,6 @@ Original static HTML prototypes live in `legacy/` for reference.
 
 Connected to GitHub (`felipelopezm1/xylem`) and Vercel. Pushes to `main` trigger automatic deploys.
 
-Live: [xylem-jec26.vercel.app](https://xylem-jec26.vercel.app)
+Live: [xylem-site.vercel.app](https://xylem-site.vercel.app) (also [xylem-jec26.vercel.app](https://xylem-jec26.vercel.app), [xylem-bio.vercel.app](https://xylem-bio.vercel.app))
+
+Link previews use Open Graph screenshots in `public/og/`. Regenerate after visual changes: `npm run og:capture` (requires Playwright).
