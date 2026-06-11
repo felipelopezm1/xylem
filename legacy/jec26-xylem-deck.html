@@ -73,8 +73,8 @@ ul.ticks.g li::before{color:var(--accent)}ul.ticks.gold li::before{color:var(--g
 .metric .v{font-size:clamp(28px,3.6vw,52px);line-height:1;color:var(--cyan)}
 .metric .v em{font-style:italic;color:var(--accent)}
 .metric .l{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:10px}
-.video{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:rgba(10,10,10,.8)}
-.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video{position:relative;z-index:4;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:rgba(10,10,10,.8);pointer-events:auto}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:auto}
 .lockup{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .lockup img{display:block;width:auto;height:auto;object-fit:contain;flex-shrink:0}
 .lockup img.jec{max-height:clamp(54px,8vw,96px);max-width:min(340px,42vw)}
@@ -88,7 +88,9 @@ ul.ticks.g li::before{color:var(--accent)}ul.ticks.gold li::before{color:var(--g
 body.notes-open .dots{bottom:clamp(130px,19vh,190px)}
 .dots button{width:8px;height:8px;border-radius:50%;border:0;background:var(--muted2);cursor:pointer;padding:0}
 .dots button.on{background:var(--accent);width:22px;border-radius:5px}
-.zones{position:fixed;left:0;right:0;top:clamp(56px,7.5vw,72px);bottom:clamp(48px,6.5vw,64px);z-index:20;display:flex;pointer-events:none}.zones span{flex:1;cursor:pointer;pointer-events:auto}.zones span:first-child{flex:0 0 30%}
+.zones{position:fixed;left:0;right:0;top:clamp(56px,7.5vw,72px);bottom:clamp(48px,6.5vw,64px);z-index:20;display:flex;pointer-events:none}
+.zones #zPrev,.zones #zNext{flex:0 0 min(16vw,200px);cursor:pointer;pointer-events:auto}
+.zones .zPass{flex:1;pointer-events:none}
 .hint{position:fixed;right:clamp(22px,3vw,40px);bottom:clamp(54px,6vw,84px);z-index:50;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2)}
 body.notes-open .hint{bottom:clamp(140px,20vh,200px)}
 .qr-panel{position:fixed;z-index:55;pointer-events:auto}
@@ -292,7 +294,7 @@ body.notes-open .qr-title{bottom:clamp(140px,19vh,200px)}
   </div>
   <div class="pageprog" id="prog"></div>
 </div>
-<div class="zones"><span id="zPrev"></span><span id="zNext"></span></div>
+<div class="zones"><span id="zPrev"></span><span class="zPass" aria-hidden="true"></span><span id="zNext"></span></div>
 <div class="ui dots" id="dots"></div>
 <div class="qr-panel qr-title"><a href="https://xylem-bio.vercel.app/legacy/jec26-xylem-deck.html" target="_blank" rel="noopener noreferrer" aria-label="Open deck link"><img src="JEC26_branding/deck-qr.png" alt="QR code"></a><span data-i18n="meta.qrLabel">Scan · open deck</span></div>
 <div class="qr-panel qr-mini"><a href="https://xylem-bio.vercel.app/legacy/jec26-xylem-deck.html" target="_blank" rel="noopener noreferrer" aria-label="Open deck link"><img src="JEC26_branding/deck-qr.png" alt="QR code"></a></div>
