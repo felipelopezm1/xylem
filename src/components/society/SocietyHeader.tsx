@@ -8,7 +8,6 @@ export default function SocietyHeader() {
     <header id="hdr">
       <Wrap className="nav">
         <Link className="back" to="/">
-          <span className="b" />
           <Trans k="nav.back" />
         </Link>
         <LangSwitcher />

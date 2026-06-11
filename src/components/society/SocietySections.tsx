@@ -11,7 +11,6 @@ interface SectionProps {
   eyebrowKey: string
   titleKey: string
   leadKey: string
-  chips?: { key: string; className: string }[]
   paragraphs?: { key: string; bold?: boolean }[]
   pullQuote?: { quoteKey: string; attrKey: string }
   children?: ReactNode
@@ -24,7 +23,6 @@ export function SocietySection({
   eyebrowKey,
   titleKey,
   leadKey,
-  chips = [],
   paragraphs = [],
   pullQuote,
   children,
@@ -36,23 +34,14 @@ export function SocietySection({
           <div className="bignum">{num}</div>
           <div className="meta">
             <Trans k={eyebrowKey} className="eyebrow" interactive={false} />
-            {chips.length > 0 && (
-              <div className="threads">
-                {chips.map(({ key, className }) => (
-                  <span key={key} className={`chip ${className}`}>
-                    <Trans k={key} interactive={false} inline />
-                  </span>
-                ))}
-              </div>
-            )}
-            <Trans k={titleKey} className="s-title" as="h2" />
+            <Trans k={titleKey} className="s-title" as="h2" interactive={false} />
           </div>
         </div>
         <div className="grid2 reveal">
-          <Trans k={leadKey} className="lead" as="p" />
+          <Trans k={leadKey} className="lead" as="p" interactive={false} />
           <div>
             {paragraphs.map(({ key }) => (
-              <Trans key={key} k={key} className="copy" as="p" />
+              <Trans key={key} k={key} className="copy" as="p" interactive={false} />
             ))}
             {children}
           </div>
@@ -83,15 +72,10 @@ export function ProxyCardsSection() {
           <div className="bignum">05</div>
           <div className="meta">
             <Trans k="s5.eye" className="eyebrow" interactive={false} />
-            <div className="threads">
-              <span className="chip xy">
-                <Trans k="t.xy" interactive={false} inline />
-              </span>
-            </div>
-            <Trans k="s5.title" className="s-title" as="h2" />
+            <Trans k="s5.title" className="s-title" as="h2" interactive={false} />
           </div>
         </div>
-        <Trans k="s5.lead" className="lead reveal" as="p" />
+        <Trans k="s5.lead" className="lead reveal" as="p" interactive={false} />
         <div className="pcards reveal">
           {cards.map(({ pi, role, title, desc }) => (
             <div key={pi} className="pcard">
@@ -116,22 +100,16 @@ export function ProxyBridgeSection() {
         <div className="s-head reveal">
           <div className="meta">
             <Trans k="sx.eye" className="eyebrow" interactive={false} />
-            <div className="threads">
-              <span className="chip vo">
-                <Trans k="t.vo" interactive={false} inline />
-              </span>
-              <span className="chip xy">
-                <Trans k="t.xy" interactive={false} inline />
-              </span>
-              <span className="chip ch">
-                <Trans k="t.ch" interactive={false} inline />
-              </span>
-            </div>
-            <Trans k="sx.title" className="s-title" as="h2" />
+            <Trans k="sx.title" className="s-title" as="h2" interactive={false} />
           </div>
         </div>
-        <Trans k="sx.lead" className="lead reveal" as="p" />
-        <div className="vasc reveal">
+        <div className="slide-body reveal">
+          <div className="slide-copy">
+            <Trans k="sx.lead" className="lead" as="p" interactive={false} />
+            <Trans k="sx.p1" className="copy" as="p" interactive={false} />
+            <Trans k="sx.p2" className="copy" as="p" interactive={false} />
+          </div>
+          <div className="slide-diagram vasc">
           <svg viewBox="0 0 760 480" aria-hidden="true">
             <defs>
               <marker
@@ -271,11 +249,8 @@ export function ProxyBridgeSection() {
               COORDINATED · REGENERATIVE ABUNDANCE
             </text>
           </svg>
-          <Trans k="sx.cap" className="vasc-cap" interactive={false} as="p" />
-        </div>
-        <div className="grid2 reveal" style={{ marginTop: 30 }}>
-          <Trans k="sx.p1" className="copy" as="p" />
-          <Trans k="sx.p2" className="copy" as="p" />
+            <Trans k="sx.cap" className="vasc-cap" interactive={false} as="p" />
+          </div>
         </div>
       </Wrap>
     </section>
@@ -296,19 +271,14 @@ export function JecMappingSection() {
           <div className="bignum">05b</div>
           <div className="meta">
             <Trans k="sj.eye" className="eyebrow" interactive={false} />
-            <div className="threads">
-              <span className="chip vo">
-                <Trans k="t.jec" interactive={false} inline />
-              </span>
-              <span className="chip xy">
-                <Trans k="t.xy" interactive={false} inline />
-              </span>
-            </div>
-            <Trans k="sj.title" className="s-title" as="h2" />
+            <Trans k="sj.title" className="s-title" as="h2" interactive={false} />
           </div>
         </div>
-        <Trans k="sj.lead" className="lead reveal" as="p" />
-        <div className="jec-map reveal">
+        <div className="slide-body reveal">
+          <div className="slide-copy">
+            <Trans k="sj.lead" className="lead" as="p" interactive={false} />
+          </div>
+          <div className="slide-diagram jec-map">
           <svg viewBox="0 0 760 200" aria-hidden="true">
             <defs>
               <linearGradient id="jec-flow" x1="0" y1="0" x2="1" y2="0">
@@ -352,7 +322,8 @@ export function JecMappingSection() {
               </div>
             ))}
           </div>
-          <Trans k="sj.cap" className="vasc-cap" interactive={false} as="p" />
+            <Trans k="sj.cap" className="vasc-cap" interactive={false} as="p" />
+          </div>
         </div>
       </Wrap>
     </section>
@@ -367,19 +338,16 @@ export function ArchitectureSection() {
           <div className="bignum">06b</div>
           <div className="meta">
             <Trans k="sa.eye" className="eyebrow" interactive={false} />
-            <div className="threads">
-              <span className="chip xy">
-                <Trans k="t.xy" interactive={false} inline />
-              </span>
-              <span className="chip ch">
-                <Trans k="t.jec" interactive={false} inline />
-              </span>
-            </div>
-            <Trans k="sa.title" className="s-title" as="h2" />
+            <Trans k="sa.title" className="s-title" as="h2" interactive={false} />
           </div>
         </div>
-        <Trans k="sa.lead" className="lead reveal" as="p" />
-        <div className="arch-scroll reveal">
+        <div className="slide-body reveal">
+          <div className="slide-copy">
+            <Trans k="sa.lead" className="lead" as="p" interactive={false} />
+            <Trans k="sa.p1" className="copy" as="p" interactive={false} />
+            <Trans k="sa.p2" className="copy" as="p" interactive={false} />
+          </div>
+          <div className="slide-diagram arch-scroll">
           <svg viewBox="0 0 1180 300" aria-hidden="true" className="arch-svg">
             <defs>
               <linearGradient id="arch-g" x1="0" y1="0" x2="1" y2="0">
@@ -460,11 +428,8 @@ export function ArchitectureSection() {
               <line x1="892" y1="150" x2="968" y2="150" />
             </g>
           </svg>
-        </div>
-        <Trans k="sa.cap" className="vasc-cap reveal" interactive={false} as="p" />
-        <div className="grid2 reveal" style={{ marginTop: 30 }}>
-          <Trans k="sa.p1" className="copy" as="p" />
-          <Trans k="sa.p2" className="copy" as="p" />
+            <Trans k="sa.cap" className="vasc-cap" interactive={false} as="p" />
+          </div>
         </div>
       </Wrap>
     </section>
@@ -481,19 +446,16 @@ export function SovereigntySection() {
           <div className="bignum">07b</div>
           <div className="meta">
             <Trans k="ss.eye" className="eyebrow" interactive={false} />
-            <div className="threads">
-              <span className="chip xy">
-                <Trans k="t.xy" interactive={false} inline />
-              </span>
-              <span className="chip gs">
-                <Trans k="t.gs" interactive={false} inline />
-              </span>
-            </div>
-            <Trans k="ss.title" className="s-title" as="h2" />
+            <Trans k="ss.title" className="s-title" as="h2" interactive={false} />
           </div>
         </div>
-        <Trans k="ss.lead" className="lead reveal" as="p" />
-        <div className="sov-stack reveal">
+        <div className="slide-body reveal">
+          <div className="slide-copy">
+            <Trans k="ss.lead" className="lead" as="p" interactive={false} />
+            <Trans k="ss.p1" className="copy" as="p" interactive={false} />
+            <Trans k="ss.p2" className="copy" as="p" interactive={false} />
+          </div>
+          <div className="slide-diagram sov-stack">
           <svg viewBox="0 0 760 220" aria-hidden="true">
             <defs>
               <linearGradient id="sov-g" x1="0" y1="0" x2="1" y2="0">
@@ -529,11 +491,8 @@ export function SovereigntySection() {
               </div>
             ))}
           </div>
-          <Trans k="ss.cap" className="vasc-cap" interactive={false} as="p" />
-        </div>
-        <div className="grid2 reveal" style={{ marginTop: 30 }}>
-          <Trans k="ss.p1" className="copy" as="p" />
-          <Trans k="ss.p2" className="copy" as="p" />
+            <Trans k="ss.cap" className="vasc-cap" interactive={false} as="p" />
+          </div>
         </div>
       </Wrap>
     </section>
@@ -550,15 +509,10 @@ export function PresentationBriefSection() {
           <div className="bignum">10b</div>
           <div className="meta">
             <Trans k="sb.eye" className="eyebrow" interactive={false} />
-            <div className="threads">
-              <span className="chip vo">
-                <Trans k="t.jec" interactive={false} inline />
-              </span>
-            </div>
-            <Trans k="sb.title" className="s-title" as="h2" />
+            <Trans k="sb.title" className="s-title" as="h2" interactive={false} />
           </div>
         </div>
-        <Trans k="sb.lead" className="lead reveal" as="p" />
+        <Trans k="sb.lead" className="lead reveal" as="p" interactive={false} />
         <ol className="brief-list reveal">
           {items.map((key) => (
             <li key={key}>
@@ -579,22 +533,16 @@ export function VascularSection() {
           <div className="bignum">09</div>
           <div className="meta">
             <Trans k="s9.eye" className="eyebrow" interactive={false} />
-            <div className="threads">
-              <span className="chip xy">
-                <Trans k="t.xy" interactive={false} inline />
-              </span>
-              <span className="chip ch">
-                <Trans k="t.ch" interactive={false} inline />
-              </span>
-              <span className="chip vo">
-                <Trans k="t.vo" interactive={false} inline />
-              </span>
-            </div>
-            <Trans k="s9.title" className="s-title" as="h2" />
+            <Trans k="s9.title" className="s-title" as="h2" interactive={false} />
           </div>
         </div>
-        <Trans k="s9.lead" className="lead reveal" as="p" />
-        <div className="vasc reveal">
+        <div className="slide-body reveal">
+          <div className="slide-copy">
+            <Trans k="s9.lead" className="lead" as="p" interactive={false} />
+            <Trans k="s9.p1" className="copy" as="p" interactive={false} />
+            <Trans k="s9.p2" className="copy" as="p" interactive={false} />
+          </div>
+          <div className="slide-diagram vasc">
           <svg viewBox="0 0 760 360" aria-hidden="true">
             <defs>
               <linearGradient id="sap" x1="0" y1="1" x2="0" y2="0">
@@ -686,11 +634,8 @@ export function VascularSection() {
               opacity="0.7"
             />
           </svg>
-          <Trans k="s9.cap" className="vasc-cap" interactive={false} as="p" />
-        </div>
-        <div className="grid2 reveal" style={{ marginTop: 30 }}>
-          <Trans k="s9.p1" className="copy" as="p" />
-          <Trans k="s9.p2" className="copy" as="p" />
+            <Trans k="s9.cap" className="vasc-cap" interactive={false} as="p" />
+          </div>
         </div>
       </Wrap>
     </section>

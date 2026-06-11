@@ -7,7 +7,6 @@ export default function SocietyHero() {
   return (
     <section className="hero" id="top">
       <span className="disc d-orange" />
-      <span className="disc d-lime" />
       <Wrap>
         <Trans k="hero.kicker" className="kicker" interactive={false} as="span" />
         <PretextHoverText

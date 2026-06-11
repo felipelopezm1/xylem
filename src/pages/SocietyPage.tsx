@@ -49,7 +49,6 @@ export default function SocietyPage() {
           eyebrowKey="s1.eye"
           titleKey="s1.title"
           leadKey="s1.lead"
-          chips={[{ key: 't.xy', className: 'xy' }]}
           paragraphs={[{ key: 's1.p1' }, { key: 's1.p2' }]}
         />
         <SocietySection
@@ -59,7 +58,6 @@ export default function SocietyPage() {
           eyebrowKey="s2.eye"
           titleKey="s2.title"
           leadKey="s2.lead"
-          chips={[{ key: 't.vo', className: 'vo' }]}
           paragraphs={[{ key: 's2.p1' }, { key: 's2.p2' }]}
           pullQuote={{ quoteKey: 's2.pq', attrKey: 's2.pa' }}
         />
@@ -70,7 +68,6 @@ export default function SocietyPage() {
           eyebrowKey="s3.eye"
           titleKey="s3.title"
           leadKey="s3.lead"
-          chips={[{ key: 't.ch', className: 'ch' }]}
           paragraphs={[{ key: 's3.p1' }, { key: 's3.p2' }]}
         />
         <SocietySection
@@ -80,10 +77,6 @@ export default function SocietyPage() {
           eyebrowKey="s4.eye"
           titleKey="s4.title"
           leadKey="s4.lead"
-          chips={[
-            { key: 't.xy', className: 'xy' },
-            { key: 't.ch', className: 'ch' },
-          ]}
           paragraphs={[{ key: 's4.p1' }, { key: 's4.p2' }]}
         />
         <ProxyCardsSection />
@@ -96,7 +89,6 @@ export default function SocietyPage() {
           eyebrowKey="s6.eye"
           titleKey="s6.title"
           leadKey="s6.lead"
-          chips={[{ key: 't.xy', className: 'xy' }]}
           paragraphs={[{ key: 's6.p1' }, { key: 's6.p2' }]}
         />
         <ArchitectureSection />
@@ -108,10 +100,6 @@ export default function SocietyPage() {
           eyebrowKey="s7.eye"
           titleKey="s7.title"
           leadKey="s7.lead"
-          chips={[
-            { key: 't.gs', className: 'gs' },
-            { key: 't.ch', className: 'ch' },
-          ]}
           paragraphs={[{ key: 's7.p1' }, { key: 's7.p2' }]}
         />
         <SocietySection
@@ -121,10 +109,6 @@ export default function SocietyPage() {
           eyebrowKey="s8.eye"
           titleKey="s8.title"
           leadKey="s8.lead"
-          chips={[
-            { key: 't.vo', className: 'vo' },
-            { key: 't.gs', className: 'gs' },
-          ]}
           paragraphs={[{ key: 's8.p1' }, { key: 's8.p2' }]}
         />
         <VascularSection />
@@ -136,12 +120,6 @@ export default function SocietyPage() {
           eyebrowKey="s10.eye"
           titleKey="s10.title"
           leadKey="s10.lead"
-          chips={[
-            { key: 't.xy', className: 'xy' },
-            { key: 't.ch', className: 'ch' },
-            { key: 't.vo', className: 'vo' },
-            { key: 't.gs', className: 'gs' },
-          ]}
           paragraphs={[{ key: 's10.p1' }, { key: 's10.p2' }]}
         />
         <SocietyFooter />
