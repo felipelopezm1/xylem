@@ -28,6 +28,9 @@ export default function SocietyHero() {
           <Link to="/" className="btn">
             <Trans k="hero.cta2" interactive={false} />
           </Link>
+          <a href="/legacy/jec26-xylem-deck.html" className="btn jec">
+            <Trans k="hero.jec" interactive={false} />
+          </a>
         </div>
       </Wrap>
     </section>

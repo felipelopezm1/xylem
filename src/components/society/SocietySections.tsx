@@ -282,6 +282,295 @@ export function ProxyBridgeSection() {
   )
 }
 
+export function JecMappingSection() {
+  const panels = [
+    { tag: 't.mac', color: '#48dbe6', title: 'sj.c1.t', desc: 'sj.c1.d' },
+    { tag: 't.gs', color: '#c8ff2e', title: 'sj.c2.t', desc: 'sj.c2.d' },
+    { tag: 't.ec', color: '#f2f0d8', title: 'sj.c3.t', desc: 'sj.c3.d' },
+  ] as const
+
+  return (
+    <section className="s bone" id="s-jec">
+      <Wrap>
+        <div className="s-head reveal">
+          <div className="bignum">05b</div>
+          <div className="meta">
+            <Trans k="sj.eye" className="eyebrow" interactive={false} />
+            <div className="threads">
+              <span className="chip vo">
+                <Trans k="t.jec" interactive={false} inline />
+              </span>
+              <span className="chip xy">
+                <Trans k="t.xy" interactive={false} inline />
+              </span>
+            </div>
+            <Trans k="sj.title" className="s-title" as="h2" />
+          </div>
+        </div>
+        <Trans k="sj.lead" className="lead reveal" as="p" />
+        <div className="jec-map reveal">
+          <svg viewBox="0 0 760 200" aria-hidden="true">
+            <defs>
+              <linearGradient id="jec-flow" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stopColor="#c8ff2e" />
+                <stop offset="1" stopColor="#48dbe6" />
+              </linearGradient>
+              <marker id="jec-arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0 0 L8 4 L0 8 z" fill="#48dbe6" />
+              </marker>
+            </defs>
+            <rect x="20" y="70" width="200" height="100" rx="4" fill="rgba(72,219,230,.08)" stroke="#48dbe6" strokeWidth="1.5" />
+            <rect x="280" y="70" width="200" height="100" rx="4" fill="rgba(200,255,46,.08)" stroke="#c8ff2e" strokeWidth="1.5" />
+            <rect x="540" y="70" width="200" height="100" rx="4" fill="rgba(242,240,216,.08)" stroke="#f2f0d8" strokeWidth="1.5" />
+            <text x="120" y="58" textAnchor="middle" fontFamily="JetBrains Mono,monospace" fontSize="11" fill="#48dbe6" letterSpacing="2">
+              MACRO
+            </text>
+            <text x="380" y="58" textAnchor="middle" fontFamily="JetBrains Mono,monospace" fontSize="11" fill="#c8ff2e" letterSpacing="2">
+              DEVELOPMENT
+            </text>
+            <text x="640" y="58" textAnchor="middle" fontFamily="JetBrains Mono,monospace" fontSize="11" fill="#f2f0d8" letterSpacing="2">
+              ECOLOGY
+            </text>
+            <g stroke="url(#jec-flow)" strokeWidth="2" fill="none" markerEnd="url(#jec-arr)">
+              <line x1="120" y1="170" x2="120" y2="188" />
+              <line x1="380" y1="170" x2="380" y2="188" />
+              <line x1="640" y1="170" x2="640" y2="188" />
+            </g>
+            <rect x="260" y="188" width="240" height="10" rx="2" fill="rgba(72,219,230,.15)" stroke="#48dbe6" />
+            <text x="380" y="196" textAnchor="middle" fontFamily="Anton,sans-serif" fontSize="10" fill="#48dbe6" letterSpacing="1">
+              BIOMIMETIC PROXY LAYER
+            </text>
+          </svg>
+          <div className="jec-panels">
+            {panels.map(({ tag, color, title, desc }) => (
+              <div key={title} className="jec-panel" style={{ borderColor: color }}>
+                <span className="jec-tag" style={{ color }}>
+                  <Trans k={tag} interactive={false} inline />
+                </span>
+                <Trans k={title} as="h4" />
+                <Trans k={desc} as="p" />
+              </div>
+            ))}
+          </div>
+          <Trans k="sj.cap" className="vasc-cap" interactive={false} as="p" />
+        </div>
+      </Wrap>
+    </section>
+  )
+}
+
+export function ArchitectureSection() {
+  return (
+    <section className="s dark" id="s-arch">
+      <Wrap>
+        <div className="s-head reveal">
+          <div className="bignum">06b</div>
+          <div className="meta">
+            <Trans k="sa.eye" className="eyebrow" interactive={false} />
+            <div className="threads">
+              <span className="chip xy">
+                <Trans k="t.xy" interactive={false} inline />
+              </span>
+              <span className="chip ch">
+                <Trans k="t.jec" interactive={false} inline />
+              </span>
+            </div>
+            <Trans k="sa.title" className="s-title" as="h2" />
+          </div>
+        </div>
+        <Trans k="sa.lead" className="lead reveal" as="p" />
+        <div className="arch-scroll reveal">
+          <svg viewBox="0 0 1180 300" aria-hidden="true" className="arch-svg">
+            <defs>
+              <linearGradient id="arch-g" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stopColor="#c8ff2e" />
+                <stop offset="1" stopColor="#48dbe6" />
+              </linearGradient>
+              <marker id="arch-mk" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                <path d="M0 0 L9 4.5 L0 9 z" fill="#c8ff2e" />
+              </marker>
+            </defs>
+            <rect x="10" y="60" width="240" height="180" rx="6" fill="rgba(242,240,216,.04)" stroke="rgba(242,240,216,.22)" />
+            <text x="130" y="48" textAnchor="middle" fill="#f2f0d8" fontSize="14" letterSpacing="2" fontFamily="JetBrains Mono,monospace">
+              DATA
+            </text>
+            <text x="34" y="100" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              · biodiversity
+            </text>
+            <text x="34" y="128" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              · trade &amp; patents
+            </text>
+            <text x="34" y="156" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              · firms &amp; territory
+            </text>
+            <text x="34" y="184" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              · policy inputs
+            </text>
+            <rect x="330" y="60" width="240" height="180" rx="6" fill="rgba(10,10,10,.72)" stroke="rgba(200,255,46,.35)" />
+            <text x="450" y="48" textAnchor="middle" fill="#c8ff2e" fontSize="14" letterSpacing="2" fontFamily="JetBrains Mono,monospace">
+              NATURE PROXIES
+            </text>
+            <text x="354" y="100" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              Ants — coordination
+            </text>
+            <text x="354" y="128" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              Physarum — networks
+            </text>
+            <text x="354" y="156" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              Steiner — distribution
+            </text>
+            <text x="354" y="184" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              Dijkstra — baseline
+            </text>
+            <rect x="650" y="60" width="240" height="180" rx="6" fill="rgba(10,10,10,.72)" stroke="rgba(72,219,230,.4)" />
+            <text x="770" y="48" textAnchor="middle" fill="#48dbe6" fontSize="14" letterSpacing="2" fontFamily="JetBrains Mono,monospace">
+              AGENTIC AI
+            </text>
+            <text x="674" y="100" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              · multi-agent sim
+            </text>
+            <text x="674" y="128" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              · LLM decision bridge
+            </text>
+            <text x="674" y="156" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              · run × 1000s
+            </text>
+            <text x="674" y="184" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              · ML calibration
+            </text>
+            <rect x="970" y="60" width="200" height="180" rx="6" fill="rgba(244,197,66,.06)" stroke="rgba(244,197,66,.45)" />
+            <text x="1070" y="48" textAnchor="middle" fill="#f4c542" fontSize="14" letterSpacing="2" fontFamily="JetBrains Mono,monospace">
+              OUTPUTS
+            </text>
+            <text x="994" y="100" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              · diffusion maps
+            </text>
+            <text x="994" y="128" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              · policy scenarios
+            </text>
+            <text x="994" y="156" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              · resilience scores
+            </text>
+            <text x="994" y="184" fill="#cfc7b4" fontSize="13" fontFamily="JetBrains Mono,monospace">
+              · JEC26 papers
+            </text>
+            <g stroke="url(#arch-g)" strokeWidth="2" fill="none" markerEnd="url(#arch-mk)">
+              <line x1="252" y1="150" x2="328" y2="150" />
+              <line x1="572" y1="150" x2="648" y2="150" />
+              <line x1="892" y1="150" x2="968" y2="150" />
+            </g>
+          </svg>
+        </div>
+        <Trans k="sa.cap" className="vasc-cap reveal" interactive={false} as="p" />
+        <div className="grid2 reveal" style={{ marginTop: 30 }}>
+          <Trans k="sa.p1" className="copy" as="p" />
+          <Trans k="sa.p2" className="copy" as="p" />
+        </div>
+      </Wrap>
+    </section>
+  )
+}
+
+export function SovereigntySection() {
+  const steps = ['ss.c1', 'ss.c2', 'ss.c3', 'ss.c4'] as const
+
+  return (
+    <section className="s bone" id="s-sov">
+      <Wrap>
+        <div className="s-head reveal">
+          <div className="bignum">07b</div>
+          <div className="meta">
+            <Trans k="ss.eye" className="eyebrow" interactive={false} />
+            <div className="threads">
+              <span className="chip xy">
+                <Trans k="t.xy" interactive={false} inline />
+              </span>
+              <span className="chip gs">
+                <Trans k="t.gs" interactive={false} inline />
+              </span>
+            </div>
+            <Trans k="ss.title" className="s-title" as="h2" />
+          </div>
+        </div>
+        <Trans k="ss.lead" className="lead reveal" as="p" />
+        <div className="sov-stack reveal">
+          <svg viewBox="0 0 760 220" aria-hidden="true">
+            <defs>
+              <linearGradient id="sov-g" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stopColor="#ff3d17" />
+                <stop offset="0.5" stopColor="#48dbe6" />
+                <stop offset="1" stopColor="#c8ff2e" />
+              </linearGradient>
+              <marker id="sov-arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0 0 L8 4 L0 8 z" fill="#48dbe6" />
+              </marker>
+            </defs>
+            {steps.map((_, i) => {
+              const x = 40 + i * 175
+              return (
+                <g key={i}>
+                  <rect x={x} y="60" width="150" height="90" rx="4" fill="rgba(22,19,12,.04)" stroke={i % 2 ? '#48dbe6' : '#ff3d17'} strokeWidth="1.5" />
+                  {i < 3 && (
+                    <line x1={x + 150} y1="105" x2={x + 175} y2="105" stroke="url(#sov-g)" strokeWidth="2" markerEnd="url(#sov-arr)" />
+                  )}
+                </g>
+              )
+            })}
+            <rect x="40" y="170" width="680" height="36" rx="3" fill="rgba(200,255,46,.08)" stroke="#c8ff2e" strokeWidth="1.5" />
+            <text x="380" y="193" textAnchor="middle" fontFamily="JetBrains Mono,monospace" fontSize="10" fill="#c8ff2e" letterSpacing="2">
+              NO EXTERNAL API DEPENDENCY
+            </text>
+          </svg>
+          <div className="sov-steps">
+            {steps.map((key, i) => (
+              <div key={key} className="sov-step">
+                <span className="sov-ix">{String(i + 1).padStart(2, '0')}</span>
+                <Trans k={key} as="p" />
+              </div>
+            ))}
+          </div>
+          <Trans k="ss.cap" className="vasc-cap" interactive={false} as="p" />
+        </div>
+        <div className="grid2 reveal" style={{ marginTop: 30 }}>
+          <Trans k="ss.p1" className="copy" as="p" />
+          <Trans k="ss.p2" className="copy" as="p" />
+        </div>
+      </Wrap>
+    </section>
+  )
+}
+
+export function PresentationBriefSection() {
+  const items = ['sb.1', 'sb.2', 'sb.3', 'sb.4', 'sb.5', 'sb.6', 'sb.7'] as const
+
+  return (
+    <section className="s dark" id="s-brief">
+      <Wrap>
+        <div className="s-head reveal">
+          <div className="bignum">10b</div>
+          <div className="meta">
+            <Trans k="sb.eye" className="eyebrow" interactive={false} />
+            <div className="threads">
+              <span className="chip vo">
+                <Trans k="t.jec" interactive={false} inline />
+              </span>
+            </div>
+            <Trans k="sb.title" className="s-title" as="h2" />
+          </div>
+        </div>
+        <Trans k="sb.lead" className="lead reveal" as="p" />
+        <ol className="brief-list reveal">
+          {items.map((key) => (
+            <li key={key}>
+              <Trans k={key} interactive={false} />
+            </li>
+          ))}
+        </ol>
+      </Wrap>
+    </section>
+  )
+}
+
 export function VascularSection() {
   return (
     <section className="s dark" id="s9">

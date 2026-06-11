@@ -3,7 +3,16 @@ import SocietyPreloader from '../components/society/SocietyPreloader'
 import SocietyHeader from '../components/society/SocietyHeader'
 import SocietyHero from '../components/society/SocietyHero'
 import SocietyTicker from '../components/society/SocietyTicker'
-import { SocietySection, ProxyCardsSection, ProxyBridgeSection, VascularSection } from '../components/society/SocietySections'
+import {
+  SocietySection,
+  ProxyCardsSection,
+  ProxyBridgeSection,
+  JecMappingSection,
+  ArchitectureSection,
+  SovereigntySection,
+  PresentationBriefSection,
+  VascularSection,
+} from '../components/society/SocietySections'
 import SocietyFooter from '../components/society/SocietyFooter'
 import PageAnchorNav from '../components/nav/PageAnchorNav'
 import { SOCIETY_ANCHORS } from '../config/pageAnchors'
@@ -78,6 +87,7 @@ export default function SocietyPage() {
           paragraphs={[{ key: 's4.p1' }, { key: 's4.p2' }]}
         />
         <ProxyCardsSection />
+        <JecMappingSection />
         <ProxyBridgeSection />
         <SocietySection
           id="s6"
@@ -89,6 +99,8 @@ export default function SocietyPage() {
           chips={[{ key: 't.xy', className: 'xy' }]}
           paragraphs={[{ key: 's6.p1' }, { key: 's6.p2' }]}
         />
+        <ArchitectureSection />
+        <SovereigntySection />
         <SocietySection
           id="s7"
           num="07"
@@ -116,6 +128,7 @@ export default function SocietyPage() {
           paragraphs={[{ key: 's8.p1' }, { key: 's8.p2' }]}
         />
         <VascularSection />
+        <PresentationBriefSection />
         <SocietySection
           id="s10"
           num="10"
