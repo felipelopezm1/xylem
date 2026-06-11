@@ -49,6 +49,15 @@ const WORKS = [
     external: false,
     arrow: '↗',
   },
+  {
+    ix: '08',
+    title: 'wk.8.t',
+    cat: 'wk.8.c',
+    desc: 'wk.8.d',
+    href: '/legacy/jec26-xylem-deck.html',
+    external: false,
+    arrow: '↗',
+  },
 ] as const
 
 export default function WorksSection() {

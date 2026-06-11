@@ -357,6 +357,18 @@ h1.title .x {
   transform: translateY(-2px);
 }
 
+.btn.jec {
+  border-color: #f2f0d8;
+  color: #f2f0d8;
+}
+
+.btn.jec:hover {
+  background: #f2f0d8;
+  color: #000;
+  border-color: #f2f0d8;
+  transform: translateY(-2px);
+}
+
 /* ASCII panel */
 .ascii {
   font-family: var(--mono);

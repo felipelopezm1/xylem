@@ -60,7 +60,7 @@ export default function SimulationSection() {
 
 export function MetricsSection() {
   return (
-    <section className="block" style={{ paddingTop: 0, borderTop: 0 }}>
+    <section className="block" id="metrics" style={{ paddingTop: 0, borderTop: 0 }}>
       <Wrap className="reveal">
         <div className="metrics">
           <div className="metric">

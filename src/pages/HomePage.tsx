@@ -10,6 +10,8 @@ import CoevolutionSection from '../components/home/CoevolutionSection'
 import WorksSection from '../components/home/WorksSection'
 import FAQSection from '../components/home/FAQSection'
 import HomeFooter from '../components/home/HomeFooter'
+import PageAnchorNav from '../components/nav/PageAnchorNav'
+import { HOME_ANCHORS } from '../config/pageAnchors'
 import { useHeaderSolid, usePreloader, useScrollReveal } from '../hooks/useSiteEffects'
 import '../styles/home.css'
 
@@ -31,6 +33,7 @@ export default function HomePage() {
     <>
       <HomePreloader />
       <HomeHeader />
+      <PageAnchorNav anchors={HOME_ANCHORS} variant="home" />
       <main>
         <Hero />
         <Prologue />

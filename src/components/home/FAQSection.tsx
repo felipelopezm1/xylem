@@ -14,7 +14,7 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section className="block" style={{ background: 'linear-gradient(180deg,var(--bg),var(--bg-2))' }}>
+    <section className="block" id="faq" style={{ background: 'linear-gradient(180deg,var(--bg),var(--bg-2))' }}>
       <Wrap>
         <div className="head reveal">
           <span className="num-tag">05</span>

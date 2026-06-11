@@ -4,7 +4,7 @@ import { Trans } from '../../contexts/LanguageContext'
 
 export default function SocietyFooter() {
   return (
-    <footer>
+    <footer id="contact">
       <Wrap>
         <Trans k="ft.big" className="foot-big reveal" as="p" />
         <div className="foot-grid reveal">

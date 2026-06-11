@@ -5,6 +5,8 @@ import SocietyHero from '../components/society/SocietyHero'
 import SocietyTicker from '../components/society/SocietyTicker'
 import { SocietySection, ProxyCardsSection, ProxyBridgeSection, VascularSection } from '../components/society/SocietySections'
 import SocietyFooter from '../components/society/SocietyFooter'
+import PageAnchorNav from '../components/nav/PageAnchorNav'
+import { SOCIETY_ANCHORS } from '../config/pageAnchors'
 import { useHeaderSolid, useScrollReveal, useSocietyPreloader } from '../hooks/useSiteEffects'
 import '../styles/society.css'
 
@@ -27,6 +29,7 @@ export default function SocietyPage() {
       <div className="grain" />
       <SocietyPreloader />
       <SocietyHeader />
+      <PageAnchorNav anchors={SOCIETY_ANCHORS} variant="society" />
       <main>
         <SocietyHero />
         <SocietyTicker />

@@ -31,6 +31,9 @@ export default function HomeFooter() {
               <a href="/legacy/tide-xylem-deck.html">
                 <Trans k="ft.w6" interactive={false} />
               </a>
+              <a href="/legacy/jec26-xylem-deck.html">
+                <Trans k="ft.w7" interactive={false} />
+              </a>
             </div>
             <div className="foot-col reveal">
               <Trans k="ft.contact" as="h6" interactive={false} />

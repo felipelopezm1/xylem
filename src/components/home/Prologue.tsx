@@ -3,7 +3,7 @@ import { Trans } from '../../contexts/LanguageContext'
 
 export default function Prologue() {
   return (
-    <section className="block prologue">
+    <section className="block prologue" id="prologue">
       <Wrap className="reveal">
         <Trans
           k="pro.eye"

@@ -64,6 +64,9 @@ export function Hero() {
               <a href="/legacy/tide-xylem-deck.html" className="btn tide">
                 <Trans k="hero.cta4" interactive={false} />
               </a>
+              <a href="/legacy/jec26-xylem-deck.html" className="btn jec">
+                <Trans k="hero.cta5" interactive={false} />
+              </a>
             </div>
           </div>
           <pre className="ascii">
