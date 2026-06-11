@@ -175,7 +175,7 @@ SLIDES = """
       <div class="step" style="margin-top:14px"><div class="credit"><span data-i18n="s1.credit">MSc. Felipe L\u00f3pez Mantilla</span><span><b data-i18n="s1.inst">UAL \u00b7 Creative Computing Institute</b></span></div></div>
       <div class="step" style="margin-top:18px"><div class="lockup">
         <img class="jec" src="JEC26_branding/jec26-wordmark.png" alt="JEC26">
-        <img class="ehu" src="JEC26_branding/Ekonomia eta Enpresa Fakultatea - Facultad de Econom\u00eda y Empresa/Facultad Economia_Bizkaia_bilingue_negativo_alta.png" alt="EHU">
+        <img class="ehu" src="JEC26_branding/ehu-facultad-bizkaia.png" alt="EHU Facultad de Econom\u00eda y Empresa">
         <span class="for"><span data-i18n="s1.for">Prepared for</span><b data-i18n="s1.forB">XX Jornadas de Econom\u00eda Cr\u00edtica \u00b7 Bilbao 2026</b><span data-i18n="s1.forSub">EHU Bizkaia \u00b7 Facultad de Econom\u00eda y Empresa</span></span>
       </div></div>
     </div>
