@@ -79,8 +79,13 @@ ul.ticks.g li::before{color:var(--accent)}ul.ticks.gold li::before{color:var(--g
 .metric .v{font-size:clamp(28px,3.6vw,52px);line-height:1;color:var(--cyan)}
 .metric .v em{font-style:italic;color:var(--accent)}
 .metric .l{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:10px}
-.video{position:relative;z-index:4;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:rgba(10,10,10,.8);pointer-events:auto}
-.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:auto}
+.video{position:relative;z-index:4;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#000;pointer-events:auto}
+.video iframe{position:absolute;left:0;width:100%;height:128%;top:-12%;border:0;pointer-events:auto}
+.video.is-fs,.video:fullscreen,.video:-webkit-full-screen{width:100vw;height:100vh;max-width:none;aspect-ratio:auto;border:0;border-radius:0;background:#000}
+.video.is-fs iframe,.video:fullscreen iframe,.video:-webkit-full-screen iframe{inset:0;width:100%;height:100%;top:0;left:0}
+.vid-fs{position:absolute;right:10px;bottom:10px;z-index:6;background:rgba(0,0,0,.82);border:1px solid var(--line);color:var(--ink);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:7px 11px;border-radius:5px;cursor:pointer;pointer-events:auto}
+.vid-fs:hover{border-color:var(--cyan);color:var(--cyan)}
+.video.is-fs .vid-fs,.video:fullscreen .vid-fs,.video:-webkit-full-screen .vid-fs{right:18px;bottom:18px}
 .lockup{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .lockup img{display:block;width:auto;height:auto;object-fit:contain;flex-shrink:0}
 .lockup img.jec{max-height:clamp(54px,8vw,96px);max-width:min(340px,42vw)}
@@ -164,6 +169,8 @@ TAIL = """
     document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));
     document.getElementById('notesBtn').textContent=(lang==='es'?'N \u00b7 Notas':'N \u00b7 Notes');
     updateNotes(); localStorage.setItem('jec26-lang',lang);
+    const vfs=document.getElementById('vidFs'), vw=document.getElementById('videoWrap');
+    if(vfs&&vw){const on=document.fullscreenElement===vw;vfs.setAttribute('data-i18n',on?'ui.vidFsExit':'ui.vidFs');vfs.textContent=t(on?'ui.vidFsExit':'ui.vidFs');}
   }
   function updateNotes(){document.getElementById('secLabel').textContent=secName(i);document.getElementById('notesText').innerHTML='<span class="time">Slide '+(i+1)+'</span>'+(t('notes.'+i)||'');}
   function go(n){i=Math.max(0,Math.min(tot-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));dots.forEach((d,k)=>d.classList.toggle('on',k===i));document.getElementById('cur').textContent=String(i+1).padStart(2,'0');document.getElementById('prog').style.width=((i+1)/tot*100)+'%';document.body.classList.toggle('qr-title-slide',i===0);updateNotes();history.replaceState(null,'','#'+(i+1));}
@@ -181,6 +188,9 @@ TAIL = """
   });
   let sx=null; addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
   addEventListener('touchend',e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50){dx<0?next():prev();}sx=null;},{passive:true});
+  const videoWrap=document.getElementById('videoWrap'), vidFs=document.getElementById('vidFs');
+  function syncVidFs(){if(!vidFs||!videoWrap)return;const on=document.fullscreenElement===videoWrap;videoWrap.classList.toggle('is-fs',on);vidFs.setAttribute('data-i18n',on?'ui.vidFsExit':'ui.vidFs');vidFs.textContent=t(on?'ui.vidFsExit':'ui.vidFs');}
+  if(vidFs&&videoWrap){vidFs.onclick=e=>{e.stopPropagation();if(document.fullscreenElement===videoWrap)document.exitFullscreen?.();else videoWrap.requestFullscreen?.();};addEventListener('fullscreenchange',syncVidFs);}
   applyLang(); go((parseInt(location.hash.replace('#',''))||1)-1);
 })();
 </script>
@@ -225,7 +235,7 @@ SLIDES = """
       <h2 class="step" style="font-size:clamp(26px,3.6vw,46px)" data-i18n="s4.h2">Agents that move like <em>nature moves</em></h2>
       <p class="body step" data-i18n="s4.body">A deterministic 3D proxy where agents are governed by interchangeable <b>biomimetic layers</b>. A Python decision bridge calls a language model for staging and routing choices.</p>
       <div class="metrics step"><div class="metric"><div class="v">5</div><div class="l" data-i18n="s4.m1">biomimetic layers</div></div><div class="metric"><div class="v">1550</div><div class="l" data-i18n="s4.m2">simulation runs</div></div><div class="metric"><div class="v"><em>3</em></div><div class="l" data-i18n="s4.m3">policies per layer</div></div></div></div>
-      <div class="step"><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/CtQIhM4RpXQ" title="Xylem" allowfullscreen loading="lazy"></iframe></div>
+      <div class="step"><div class="video" id="videoWrap"><iframe src="https://www.youtube-nocookie.com/embed/CtQIhM4RpXQ?rel=0&amp;modestbranding=1&amp;controls=1&amp;fs=1&amp;iv_load_policy=3&amp;playsinline=1" title="Xylem simulation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe><button class="vid-fs" id="vidFs" type="button" data-i18n="ui.vidFs">Fullscreen</button></div>
       <p class="kj" style="text-align:center;margin-top:14px" data-i18n="s4.vidSub">Level 1 \u00b7 Seed 33333 \u00b7 a lattice of identical arenas, one decision policy each</p></div>
     </div>
   </section>
