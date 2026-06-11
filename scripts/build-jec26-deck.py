@@ -97,11 +97,18 @@ body.notes-open .dots{bottom:clamp(130px,19vh,190px)}
 .zones{position:fixed;left:0;right:0;top:clamp(56px,7.5vw,72px);bottom:clamp(48px,6.5vw,64px);z-index:20;display:flex;pointer-events:none}.zones span{flex:1;cursor:pointer;pointer-events:auto}.zones span:first-child{flex:0 0 30%}
 .hint{position:fixed;right:clamp(22px,3vw,40px);bottom:clamp(54px,6vw,84px);z-index:50;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2)}
 body.notes-open .hint{bottom:clamp(140px,20vh,200px)}
-.qr-panel{position:fixed;left:clamp(22px,3vw,40px);bottom:clamp(58px,6vw,88px);z-index:55;display:flex;align-items:center;gap:10px;pointer-events:auto;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.72)}
-body.notes-open .qr-panel{bottom:clamp(140px,20vh,200px)}
-.qr-panel a{display:block;line-height:0;flex-shrink:0}
-.qr-panel img{width:clamp(48px,5vw,68px);height:clamp(48px,5vw,68px);border-radius:4px;background:#fff;padding:3px;object-fit:contain}
-.qr-panel span{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;line-height:1.4;max-width:14ch}
+.qr-panel{position:fixed;z-index:55;pointer-events:auto}
+.qr-panel a{display:block;line-height:0}
+.qr-title{left:clamp(22px,3vw,40px);bottom:clamp(58px,6vw,88px);display:none;align-items:center;gap:10px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.72)}
+.qr-title img{width:clamp(48px,5vw,68px);height:clamp(48px,5vw,68px);border-radius:4px;background:#fff;padding:3px;object-fit:contain}
+.qr-title span{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;line-height:1.4;max-width:14ch}
+.qr-mini{top:clamp(52px,6.5vw,68px);right:clamp(22px,3vw,40px);display:none;padding:0;border:0;background:transparent}
+.qr-mini img{width:clamp(34px,3.2vw,44px);height:clamp(34px,3.2vw,44px);border:1px solid var(--line);border-radius:4px;background:#fff;padding:2px;object-fit:contain}
+body.qr-title-slide .qr-title{display:flex}
+body.qr-title-slide .qr-mini{display:none}
+body:not(.qr-title-slide) .qr-title{display:none}
+body:not(.qr-title-slide) .qr-mini{display:block}
+body.notes-open .qr-title{bottom:clamp(140px,19vh,200px)}
 .notes-panel{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(0,0,0,.94);border-top:1px solid var(--line);padding:14px clamp(40px,6.5vw,104px) 18px;transform:translateY(100%);transition:transform .35s;font-family:var(--mono)}
 .notes-panel.open{transform:translateY(0)}
 .notes-panel h3{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
@@ -131,7 +138,8 @@ TAIL = """
 </div>
 <div class="zones"><span id="zPrev"></span><span id="zNext"></span></div>
 <div class="ui dots" id="dots"></div>
-<div class="qr-panel"><a href="https://xylem-bio.vercel.app/legacy/jec26-xylem-deck.html" target="_blank" rel="noopener noreferrer" aria-label="Open deck link"><img src="JEC26_branding/deck-qr.png" alt="QR code"></a><span data-i18n="meta.qrLabel">Scan \u00b7 open deck</span></div>
+<div class="qr-panel qr-title"><a href="https://xylem-bio.vercel.app/legacy/jec26-xylem-deck.html" target="_blank" rel="noopener noreferrer" aria-label="Open deck link"><img src="JEC26_branding/deck-qr.png" alt="QR code"></a><span data-i18n="meta.qrLabel">Scan \u00b7 open deck</span></div>
+<div class="qr-panel qr-mini"><a href="https://xylem-bio.vercel.app/legacy/jec26-xylem-deck.html" target="_blank" rel="noopener noreferrer" aria-label="Open deck link"><img src="JEC26_branding/deck-qr.png" alt="QR code"></a></div>
 <div class="hint" data-i18n="meta.hint">\u2190 \u2192 to navigate \u00b7 F fullscreen \u00b7 P print/PDF \u00b7 N speaker notes</div>
 <div class="notes-panel" id="notesPanel"><h3 data-i18n="ui.notesTitle">15-min speaker notes</h3><p id="notesText"></p></div>
 <script src="jec26-deck-i18n.js"></script>
@@ -156,7 +164,7 @@ TAIL = """
     updateNotes(); localStorage.setItem('jec26-lang',lang);
   }
   function updateNotes(){document.getElementById('secLabel').textContent=secName(i);document.getElementById('notesText').innerHTML='<span class="time">Slide '+(i+1)+'</span>'+(t('notes.'+i)||'');}
-  function go(n){i=Math.max(0,Math.min(tot-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));dots.forEach((d,k)=>d.classList.toggle('on',k===i));document.getElementById('cur').textContent=String(i+1).padStart(2,'0');document.getElementById('prog').style.width=((i+1)/tot*100)+'%';updateNotes();history.replaceState(null,'','#'+(i+1));}
+  function go(n){i=Math.max(0,Math.min(tot-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));dots.forEach((d,k)=>d.classList.toggle('on',k===i));document.getElementById('cur').textContent=String(i+1).padStart(2,'0');document.getElementById('prog').style.width=((i+1)/tot*100)+'%';document.body.classList.toggle('qr-title-slide',i===0);updateNotes();history.replaceState(null,'','#'+(i+1));}
   function next(){go(i+1)} function prev(){go(i-1)}
   document.getElementById('zNext').onclick=next; document.getElementById('zPrev').onclick=prev;
   document.querySelectorAll('.lang button').forEach(b=>b.onclick=e=>{e.stopPropagation();lang=b.dataset.lang;applyLang();});
