@@ -32,6 +32,12 @@ const shots = [
     wait: 2000,
     viewport: { width: 1200, height: 627 },
   },
+  {
+    url: `file://${path.join(outDir, 'jec-deck-card.html')}`,
+    file: 'jec-deck.jpg',
+    wait: 1200,
+    viewport: { width: 1200, height: 627 },
+  },
 ]
 
 await mkdir(outDir, { recursive: true })

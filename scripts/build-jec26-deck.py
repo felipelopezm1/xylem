@@ -12,7 +12,14 @@ HEAD = """<!DOCTYPE html>
 <title>Xylem \u00d7 JEC26 \u2014 Biomimicry & Agentic AI for Critical Economics</title>
 <meta name="description" content="A collaboration proposal for XX Jornadas de Econom\u00eda Cr\u00edtica \u2014 biomimicry and agentic AI for critical economics, development and ecology.">
 <meta property="og:url" content="https://xylem-bio.vercel.app/legacy/jec26-xylem-deck.html">
-<meta property="og:image" content="https://xylem-bio.vercel.app/og/jec-deck.jpg?v=3">
+<meta property="og:image" content="https://xylem-bio.vercel.app/og/jec-deck.jpg?v=4">
+<meta property="og:image:secure_url" content="https://xylem-bio.vercel.app/og/jec-deck.jpg?v=4">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="Xylem \u00d7 JEC26 collaboration deck \u2014 Biomimicry & Agentic AI for Critical Economics">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xylem-bio.vercel.app/og/jec-deck.jpg?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
